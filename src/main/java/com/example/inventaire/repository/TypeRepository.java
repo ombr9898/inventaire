@@ -1,0 +1,7 @@
+package com.example.inventaire.repository;
+
+import com.example.inventaire.entity.Type;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
+
+public interface TypeRepository extends Neo4jRepository<Type,Long> {
+}
