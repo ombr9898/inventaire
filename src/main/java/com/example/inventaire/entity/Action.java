@@ -7,4 +7,5 @@ public class Action {
     @Id
     @GeneratedValue
     private Long id;
+
 }
