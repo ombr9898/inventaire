@@ -82,8 +82,9 @@ public class InventaireApplication implements CommandLineRunner {
             SampleLine sampleLine=new SampleLine();
             sampleLine.setSample(sample1);
             sampleLineList.add(sampleLine);
-            sampleLine.setSample(sample2);
-            sampleLineList.add(sampleLine);
+            SampleLine sampleLine2=new SampleLine();
+            sampleLine2.setSample(sample2);
+            sampleLineList.add(sampleLine2);
 
         }
         Inventory inventory=new Inventory();
