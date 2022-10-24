@@ -22,7 +22,8 @@ public class BoxController {
         return boxService.getBoxes();
     }
     @GetMapping(value = "/boxes/{id}")
-    public Optional<Box> getBox( @PathVariable("id") Long id) {
+    public Box getBox( @PathVariable("id") Long id) {
         return boxService.getBox(id);
     }
+
 }

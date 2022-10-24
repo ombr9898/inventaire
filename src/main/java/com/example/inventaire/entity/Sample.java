@@ -9,9 +9,6 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import java.util.Date;
-import java.util.TimeZone;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -21,12 +18,11 @@ public class Sample {
     @Id
     @GeneratedValue
     private Long id;
-    private SampleState stateOfSample ;
-    private String locationOfSample ;
-    @Relationship(type ="SAMPLE_IN", direction = Relationship.Direction.OUTGOING)
+    private SampleState stateOfSample;
+    @Relationship(type = "SAMPLE_IN", direction = Relationship.Direction.OUTGOING)
     private Box box;
-    @Relationship(type ="SAMPLE_DIFFERENT", direction = Relationship.Direction.OUTGOING)
+    @Relationship(type = "SAMPLE_DIFFERENT", direction = Relationship.Direction.OUTGOING)
     private Type type;
-    @Relationship(type="SAMPLE_AS", direction = Relationship.Direction.OUTGOING)
+    @Relationship(type = "SAMPLE_AS", direction = Relationship.Direction.OUTGOING)
     private Product product;
 }

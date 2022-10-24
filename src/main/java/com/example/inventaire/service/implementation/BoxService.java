@@ -28,8 +28,8 @@ public class BoxService implements BoxServiceContrat {
     }
 
     @Override
-    public Optional<Box> getBox(Long id) {
-        return boxRepository.findById(id) ;
+    public Box getBox(Long id) {
+        return boxRepository.findById(id).get() ;
     }
 
     @Override

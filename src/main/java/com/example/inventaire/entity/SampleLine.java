@@ -25,4 +25,5 @@ public class SampleLine {
     @Relationship(type = "SAMPLELINE_OF", direction = Relationship.Direction.OUTGOING)
     private Sample sample;
     private String comment;
+    private String locationOfSample ;
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface BoxServiceContrat {
     Box addBox(Box box);
     Box updateBox(Long id,Box box);
-    Optional<Box> getBox(Long id);
+    Box getBox(Long id);
     List<Box> getBoxes();
     Void deleteBox(Long id);
 }
