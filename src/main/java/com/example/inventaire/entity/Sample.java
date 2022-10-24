@@ -21,8 +21,7 @@ public class Sample {
     @Id
     @GeneratedValue
     private Long id;
-    private String nameOfSample ;
-    private String stateOfSample ;
+    private SampleState stateOfSample ;
     private String locationOfSample ;
     @Relationship(type ="SAMPLE_IN", direction = Relationship.Direction.OUTGOING)
     private Box box;

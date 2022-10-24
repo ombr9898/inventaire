@@ -24,4 +24,5 @@ public class SampleLine {
     private Date dateEntered ;
     @Relationship(type = "SAMPLELINE_OF", direction = Relationship.Direction.OUTGOING)
     private Sample sample;
+    private String comment;
 }

@@ -9,6 +9,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -18,10 +19,9 @@ public class Box {
     @Id
     @GeneratedValue
     private Long id;
-    private String boxOfName;
-    private String location;
+    private Location location;
     private String comment;
-    private String state;
+    private State state;
     private Date dateOfCreation;
     private Date dateOfUpdated;
     private int numberOfSample;
