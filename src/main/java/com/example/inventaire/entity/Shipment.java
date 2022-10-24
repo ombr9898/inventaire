@@ -24,8 +24,7 @@ public class Shipment {
     private Date sentDate;
     private String Comment;
     private int quantity;
-    private String OLFStatus ;
-    @Relationship(type = "SHIPMENT_OF", direction = Relationship.Direction.INCOMING)
-    private Sample sample;
+    @Relationship(type = "SHIPMENT_OF", direction = Relationship.Direction.OUTGOING)
+    private SampleLine sampleLine;
 
 }
