@@ -7,23 +7,25 @@ import lombok.Setter;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Node("Box")
-public class Box {
+@Node("Shipment")
+public class Shipment {
     @Id
     @GeneratedValue
     private Long id;
-    private String boxOfName;
-    private String location;
-    private String comment;
-    private String state;
-    private Date dateOfCreation;
-    private Date dateOfUpdated;
-    private int numberOfSample;
+    private String dfStatus;
+    private Date sentDate;
+    private String Comment;
+    private int quantity;
+    private String OLFStatus ;
+    @Relationship(type = "SHIPMENT_OF", direction = Relationship.Direction.INCOMING)
+    private Sample sample;
 
 }
