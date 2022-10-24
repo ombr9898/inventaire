@@ -18,6 +18,5 @@ public class Destination {
     @GeneratedValue
     private Long id;
     private String nameOfDesination;
-    private int numberOfShipment;
     private boolean isInSt ;
 }

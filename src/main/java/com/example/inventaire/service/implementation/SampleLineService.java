@@ -1,12 +1,14 @@
 package com.example.inventaire.service.implementation;
 
+import com.example.inventaire.entity.LocationSample;
 import com.example.inventaire.entity.Sample;
 import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.repository.SampleLineRepository;
 import com.example.inventaire.service.contrat.SampleLineServiceContrat;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class SampleLineService implements SampleLineServiceContrat {
     SampleLineRepository sampleLineRepository;
 
@@ -46,7 +48,7 @@ public class SampleLineService implements SampleLineServiceContrat {
         for (SampleLine sampleLine:
              sampleLineList) {
             sampleLine.setComment("Taked by User");
-            sampleLine.setLocationOfSample("With User");
+            sampleLine.setLocationOfSample(LocationSample.OUT_OF_THE_BOX);
             sampleLineRepository.save(sampleLine);
         }
         return sampleLineList;
@@ -57,7 +59,7 @@ public class SampleLineService implements SampleLineServiceContrat {
         for (SampleLine sampleLine:
                 sampleLineList) {
             sampleLine.setComment("Returned by User");
-            sampleLine.setLocationOfSample("In the box");
+            sampleLine.setLocationOfSample(LocationSample.IN_THE_BOX);
             sampleLineRepository.save(sampleLine);
         }
         return sampleLineList;

@@ -20,7 +20,7 @@ public class Shipment {
     @Id
     @GeneratedValue
     private Long id;
-    private String dfStatus;
+    private DfStatus dfStatus;
     private Date sentDate;
     private String Comment;
     private int quantity;
