@@ -13,6 +13,7 @@ public interface SampleServiceContrat {
     Sample getSample(Long id);
     List<Sample> getSamples();
     Void deleteSample(Long id);
+    Integer numberOfSampleLineInSample(Sample sample);
 
 
 

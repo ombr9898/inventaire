@@ -32,4 +32,8 @@ public class BoxController {
         boxService.deleteBox(id);
         return "Box Deleted";
     }
+    @GetMapping(value = "/box/numofsampleline/{box}")
+    public Integer numberOfSampleLineInBox(@PathVariable("box") Box box) {
+        return boxService.numberOfSampleLineInBox(box);
+    }
 }

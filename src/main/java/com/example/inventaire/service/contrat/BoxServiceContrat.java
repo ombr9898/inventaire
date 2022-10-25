@@ -12,4 +12,5 @@ public interface BoxServiceContrat {
     List<Box> getBoxes();
     Void deleteBox(Long id);
 
+    Integer numberOfSampleLineInBox(Box box);
 }

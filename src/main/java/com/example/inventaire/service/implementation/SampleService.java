@@ -1,5 +1,6 @@
 package com.example.inventaire.service.implementation;
 
+import com.example.inventaire.entity.Box;
 import com.example.inventaire.entity.Sample;
 import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.repository.SampleLineRepository;
@@ -48,6 +49,14 @@ public class SampleService implements SampleServiceContrat {
     public Void deleteSample(Long id) {
         sampleRepository.deleteById(id);
         return null;
+    }
+
+    @Override
+    public Integer numberOfSampleLineInSample(Sample sample) {
+        List<SampleLine> samplelines= sampleLineRepository.findAll();
+        samplelines=samplelines.stream().filter(sampleLine -> sampleLine.getSample().getId()==sample.getId()).toList();
+
+        return samplelines.size();
     }
 
 }

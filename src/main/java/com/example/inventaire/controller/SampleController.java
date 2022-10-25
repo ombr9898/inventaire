@@ -1,6 +1,7 @@
 package com.example.inventaire.controller;
 
 import com.example.inventaire.entity.Sample;
+import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.service.implementation.SampleService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,4 +26,8 @@ public class SampleController {
     @PutMapping(value= "/samples")
     public Sample updateSample(@RequestBody Long id, Sample sample) {return sampleService.updateSample(id,sample);}
 
+    @GetMapping(value = "/sample/numofsampleline/{sample}")
+    public Integer numberOfSampleLineInSample(@PathVariable("sample") Sample sample) {
+        return sampleService.numberOfSampleLineInSample(sample);
+    }
 }
