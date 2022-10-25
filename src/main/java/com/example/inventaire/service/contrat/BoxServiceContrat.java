@@ -11,4 +11,5 @@ public interface BoxServiceContrat {
     Box getBox(Long id);
     List<Box> getBoxes();
     Void deleteBox(Long id);
+
 }

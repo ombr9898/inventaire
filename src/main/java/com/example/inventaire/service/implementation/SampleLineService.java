@@ -23,8 +23,11 @@ public class SampleLineService implements SampleLineServiceContrat {
 
     @Override
     public List<SampleLine> getSampleLineOfSample(Sample sample) {
+        List<SampleLine> samplelines= sampleLineRepository.findAll();
+        samplelines=samplelines.stream().filter(sampleLine -> sampleLine.getSample().getId()==sample.getId()).toList();
 
-        return sampleLineRepository.findBySample(sample);
+
+        return samplelines;
     }
 
     @Override
@@ -69,6 +72,7 @@ public class SampleLineService implements SampleLineServiceContrat {
     @Override
     public Void deleteSampleLine(Long id) {
         sampleLineRepository.deleteById(id);
+
         return null;
     }
 }

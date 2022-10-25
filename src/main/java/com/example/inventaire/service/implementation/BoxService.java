@@ -6,7 +6,6 @@ import com.example.inventaire.service.contrat.BoxServiceContrat;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 @Service
 public class BoxService implements BoxServiceContrat {
     BoxRepository boxRepository;
@@ -40,7 +39,6 @@ public class BoxService implements BoxServiceContrat {
     @Override
     public Void deleteBox(Long id) {
         boxRepository.deleteById(id);
-
         return null;
     }
 
