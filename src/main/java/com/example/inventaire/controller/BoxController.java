@@ -27,8 +27,8 @@ public class BoxController {
     public Box createBox(@RequestBody Box box){return boxService.addBox(box);}
     @PutMapping(value= "/box")
     public  Box updateBox(@RequestBody Long id, Box box){return boxService.updateBox(id, box);}
-    @DeleteMapping(value = "/boxDelete")
-    public  String deleteBox(@RequestBody Long id){
+    @DeleteMapping(value = "/boxDelete/{id}")
+    public  String deleteBox(@PathVariable Long id){
         boxService.deleteBox(id);
         return "Box Deleted";
     }
