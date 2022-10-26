@@ -18,8 +18,10 @@ public class SampleLineService implements SampleLineServiceContrat {
     SampleLineRepository sampleLineRepository;
     ActionRepository actionRepository;
 
-    public SampleLineService(SampleLineRepository sampleLineRepository) {
+
+    public SampleLineService(SampleLineRepository sampleLineRepository, ActionRepository actionRepository) {
         this.sampleLineRepository = sampleLineRepository;
+        this.actionRepository = actionRepository;
     }
 
     @Override
@@ -104,8 +106,9 @@ public class SampleLineService implements SampleLineServiceContrat {
         action.setListOfSampleLine(sampleLineList);
         action.setTypeOfAction(TypeOfAction.DELETED);
         actionRepository.save(action);
-        sampleLineRepository.findById(id).get().setStateOfSampleLine(SampleState.DESTROYED);
-
+        SampleLine sampleLine=sampleLineRepository.findById(id).get();
+        sampleLine.setStateOfSampleLine(SampleState.DESTROYED);
+        sampleLineRepository.save(sampleLine);
         return null;
     }
 }

@@ -29,4 +29,5 @@ public class Sample {
     @NotBlank(message = "Type is required")
     @Relationship(type = "SAMPLE_AS", direction = Relationship.Direction.OUTGOING)
     private Product product;
+    private Boolean deleteSample=Boolean.FALSE;
 }

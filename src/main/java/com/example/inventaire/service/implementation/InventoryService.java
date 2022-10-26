@@ -1,7 +1,11 @@
 package com.example.inventaire.service.implementation;
 
 import com.example.inventaire.entity.Inventory;
+import com.example.inventaire.entity.InventorySample;
+import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.repository.InventoryRepository;
+import com.example.inventaire.repository.InventorySampleRepository;
+import com.example.inventaire.repository.SampleLineRepository;
 import com.example.inventaire.service.contrat.InventoryServiceContrat;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +13,29 @@ import java.util.List;
 @Service
 public class InventoryService implements InventoryServiceContrat {
     InventoryRepository inventoryRepository;
+    InventorySampleRepository inventorySampleRepository;
+    SampleLineRepository sampleLineRepository;
 
-    public InventoryService(InventoryRepository inventoryRepository) {
+    public InventoryService(InventoryRepository inventoryRepository, InventorySampleRepository inventorySampleRepository, SampleLineRepository sampleLineRepository) {
         this.inventoryRepository = inventoryRepository;
+        this.inventorySampleRepository = inventorySampleRepository;
+        this.sampleLineRepository = sampleLineRepository;
     }
 
     @Override
-    public Inventory addSInventory(Inventory inventory) {
-        return inventoryRepository.save(inventory);
+    public Inventory addSInventory() {
+        Inventory inventory=new Inventory();
+        inventoryRepository.save(inventory);
+
+        for (SampleLine sampleline:sampleLineRepository.findAll()
+             ) {
+            InventorySample inventorySample=new InventorySample();
+            inventorySample.setInventory(inventory);
+            inventorySample.setSampleLine(sampleline);
+            inventorySampleRepository.save(inventorySample);
+        }
+
+        return inventory ;
     }
 
     @Override

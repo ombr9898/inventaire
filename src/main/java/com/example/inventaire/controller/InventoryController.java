@@ -21,7 +21,7 @@ public class InventoryController {
     public Inventory getInventory(@PathVariable("id") Long id) {return inventoryService.getInventory(id);}
 
     @PostMapping(value = "/inventory")
-    public  Inventory createInventory(@RequestBody Inventory inventory){return inventoryService.addSInventory(inventory);}
+    public  Inventory createInventory(){return inventoryService.addSInventory();}
 
     @PutMapping(value ="/inventory")
 

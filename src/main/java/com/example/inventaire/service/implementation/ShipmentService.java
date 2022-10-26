@@ -4,19 +4,35 @@ import com.example.inventaire.entity.*;
 import com.example.inventaire.entity.EnumOfProject.DfStatus;
 import com.example.inventaire.entity.EnumOfProject.Location;
 import com.example.inventaire.entity.EnumOfProject.LocationSample;
+import com.example.inventaire.entity.EnumOfProject.TypeOfAction;
+import com.example.inventaire.repository.ActionRepository;
 import com.example.inventaire.repository.SampleLineRepository;
 import com.example.inventaire.repository.ShipmentRepository;
 import com.example.inventaire.service.contrat.ShipmentServiceContrat;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class ShipmentService implements ShipmentServiceContrat {
     ShipmentRepository shipmentRepository;
     SampleLineRepository sampleLineRepository;
+    ActionRepository actionRepository;
+
+    public ShipmentService(ShipmentRepository shipmentRepository, SampleLineRepository sampleLineRepository, ActionRepository actionRepository) {
+        this.shipmentRepository = shipmentRepository;
+        this.sampleLineRepository = sampleLineRepository;
+        this.actionRepository = actionRepository;
+    }
 
     @Override
     public SampleLine ShipSample(SampleLine sampleLine, Location location, DfStatus dfStatus) {
+        Action action=new Action();
+        List<SampleLine> sampleLineList=new ArrayList<>();
+        sampleLineList.add(sampleLine);
+        action.setListOfSampleLine(sampleLineList);
+        action.setTypeOfAction(TypeOfAction.MODIFIED);
+        actionRepository.save(action);
         Shipment shipment = new Shipment();
         shipment.setSampleLine(sampleLine);
         shipment.setDfStatus(dfStatus);
