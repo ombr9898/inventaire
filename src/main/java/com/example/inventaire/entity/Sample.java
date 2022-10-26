@@ -9,6 +9,8 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import javax.validation.constraints.NotBlank;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,9 +21,12 @@ public class Sample {
     @GeneratedValue
     private Long id;
     @Relationship(type = "SAMPLE_IN", direction = Relationship.Direction.OUTGOING)
+    @NotBlank(message = "Box is required")
     private Box box;
     @Relationship(type = "SAMPLE_DIFFERENT", direction = Relationship.Direction.OUTGOING)
+    @NotBlank(message = "Type is required")
     private Type type;
+    @NotBlank(message = "Type is required")
     @Relationship(type = "SAMPLE_AS", direction = Relationship.Direction.OUTGOING)
     private Product product;
 }

@@ -13,6 +13,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,9 +26,12 @@ public class SampleLine {
     private Long id;
     @LastModifiedDate
     private Date dateEntered ;
-    private SampleState stateOfSampleLine;
+    @NotBlank(message = "Sample state is required")
+    private SampleState stateOfSampleLine=SampleState.OK;
     @Relationship(type = "SAMPLELINE_OF", direction = Relationship.Direction.OUTGOING)
+    @NotBlank(message = "Sample is required")
     private Sample sample;
     private String comment;
-    private LocationSample locationOfSample ;
+    @NotBlank(message = "Location is required")
+    private LocationSample locationOfSample=LocationSample.IN_THE_BOX ;
 }

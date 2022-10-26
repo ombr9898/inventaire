@@ -10,6 +10,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -24,8 +25,8 @@ public class Shipment {
     private DfStatus dfStatus;
     private Date sentDate;
     private String Comment;
-    private int quantity;
     @Relationship(type = "SHIPMENT_OF", direction = Relationship.Direction.OUTGOING)
+    @NotBlank(message = "SampleLine is required")
     private SampleLine sampleLine;
 
 }

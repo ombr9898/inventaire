@@ -26,9 +26,8 @@ public class Box {
     private Location location;
     private String comment;
     @NotBlank(message = "State is required")
-    private State state;
+    private State state=State.SEALED;
     private Date dateOfCreation;
     private Date dateOfUpdated;
-    private int numberOfSample;
 
 }
