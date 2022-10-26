@@ -1,9 +1,12 @@
 package com.example.inventaire.entity;
 
+import com.example.inventaire.entity.EnumOfProject.LocationSample;
+import com.example.inventaire.entity.EnumOfProject.SampleState;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -22,6 +25,7 @@ public class SampleLine {
     private Long id;
     @LastModifiedDate
     private Date dateEntered ;
+    private SampleState stateOfSampleLine;
     @Relationship(type = "SAMPLELINE_OF", direction = Relationship.Direction.OUTGOING)
     private Sample sample;
     private String comment;

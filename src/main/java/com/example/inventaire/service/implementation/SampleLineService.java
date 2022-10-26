@@ -1,6 +1,6 @@
 package com.example.inventaire.service.implementation;
 
-import com.example.inventaire.entity.LocationSample;
+import com.example.inventaire.entity.EnumOfProject.LocationSample;
 import com.example.inventaire.entity.Sample;
 import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.repository.SampleLineRepository;
@@ -64,6 +64,7 @@ public class SampleLineService implements SampleLineServiceContrat {
             sampleLine.setComment("Returned by User");
             sampleLine.setLocationOfSample(LocationSample.IN_THE_BOX);
             sampleLineRepository.save(sampleLine);
+
         }
         return sampleLineList;
     }

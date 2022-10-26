@@ -18,7 +18,6 @@ public class Sample {
     @Id
     @GeneratedValue
     private Long id;
-    private SampleState stateOfSample;
     @Relationship(type = "SAMPLE_IN", direction = Relationship.Direction.OUTGOING)
     private Box box;
     @Relationship(type = "SAMPLE_DIFFERENT", direction = Relationship.Direction.OUTGOING)

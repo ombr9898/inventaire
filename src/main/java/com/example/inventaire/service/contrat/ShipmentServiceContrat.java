@@ -1,6 +1,8 @@
 package com.example.inventaire.service.contrat;
 
 import com.example.inventaire.entity.*;
+import com.example.inventaire.entity.EnumOfProject.DfStatus;
+import com.example.inventaire.entity.EnumOfProject.Location;
 
 import java.util.List;
 

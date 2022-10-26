@@ -22,10 +22,9 @@ public class SampleController {
 
     @PostMapping(value = "/addsample")
     public Sample addSample(@RequestBody Sample sample) {return sampleService.addSample(sample);}
-
-    @PutMapping(value= "/samples")
-    public Sample updateSample(@RequestBody Long id, Sample sample) {return sampleService.updateSample(id,sample);}
-
+    @DeleteMapping("/sample/{id}")
+    public  String deleteSample(@PathVariable Long id){sampleService.deleteSample(id);
+    return "Sample Deleted";}
     @GetMapping(value = "/sample/numofsampleline/{sample}")
     public Integer numberOfSampleLineInSample(@PathVariable("sample") Sample sample) {
         return sampleService.numberOfSampleLineInSample(sample);

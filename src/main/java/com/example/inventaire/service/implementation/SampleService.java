@@ -26,12 +26,7 @@ public class SampleService implements SampleServiceContrat {
         return sampleRepository.save(sample);
     }
 
-    @Override
-    public Sample updateSample(Long id, Sample sample) {
-        sample.setId(id);
-        sampleRepository.save(sample);
-        return sample;
-    }
+
 
     @Override
     public Sample getSample(Long id) {
@@ -47,6 +42,15 @@ public class SampleService implements SampleServiceContrat {
 
     @Override
     public Void deleteSample(Long id) {
+        List<SampleLine> samplelines= sampleLineRepository.findAll();
+        for (SampleLine sampleline:samplelines
+             ) {
+            System.out.println(sampleline.getId());
+            if(sampleline.getSample().getId()==id) {
+                sampleLineRepository.deleteById(sampleline.getId());
+            }
+        }
+
         sampleRepository.deleteById(id);
         return null;
     }

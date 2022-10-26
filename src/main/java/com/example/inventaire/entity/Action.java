@@ -1,5 +1,6 @@
 package com.example.inventaire.entity;
 
+import com.example.inventaire.entity.EnumOfProject.TypeOfAction;
 import lombok.*;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -18,11 +19,10 @@ public class Action {
     @Id
     @GeneratedValue
     private Long id;
-    private String typeOfAction ;
-    private int qauntity ;
+    private TypeOfAction typeOfAction ;
     private Date dateOfAction;
     @Relationship(type="ACTION_OF", direction = Relationship.Direction.INCOMING)
-    private List <Sample> listOfSample ;
+    private List <SampleLine> listOfSampleLine ;
 
 
 }

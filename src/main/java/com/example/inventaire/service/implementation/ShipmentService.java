@@ -1,6 +1,9 @@
 package com.example.inventaire.service.implementation;
 
 import com.example.inventaire.entity.*;
+import com.example.inventaire.entity.EnumOfProject.DfStatus;
+import com.example.inventaire.entity.EnumOfProject.Location;
+import com.example.inventaire.entity.EnumOfProject.LocationSample;
 import com.example.inventaire.repository.SampleLineRepository;
 import com.example.inventaire.repository.ShipmentRepository;
 import com.example.inventaire.service.contrat.ShipmentServiceContrat;

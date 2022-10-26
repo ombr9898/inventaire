@@ -1,10 +1,9 @@
 package com.example.inventaire.controller;
 
-import com.example.inventaire.entity.DfStatus;
-import com.example.inventaire.entity.Location;
+import com.example.inventaire.entity.EnumOfProject.DfStatus;
+import com.example.inventaire.entity.EnumOfProject.Location;
 import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.entity.Shipment;
-import com.example.inventaire.repository.ShipmentRepository;
 import com.example.inventaire.service.implementation.ShipmentService;
 import org.springframework.web.bind.annotation.*;
 

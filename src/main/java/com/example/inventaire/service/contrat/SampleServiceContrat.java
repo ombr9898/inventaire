@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public interface SampleServiceContrat {
     Sample addSample(Sample sample);
-    Sample updateSample(Long id,Sample sample);
     Sample getSample(Long id);
     List<Sample> getSamples();
     Void deleteSample(Long id);

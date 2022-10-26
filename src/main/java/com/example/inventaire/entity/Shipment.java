@@ -1,5 +1,6 @@
 package com.example.inventaire.entity;
 
+import com.example.inventaire.entity.EnumOfProject.DfStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

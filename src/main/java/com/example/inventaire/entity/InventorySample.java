@@ -1,5 +1,6 @@
 package com.example.inventaire.entity;
 
+import com.example.inventaire.entity.EnumOfProject.InventoryCheck;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
