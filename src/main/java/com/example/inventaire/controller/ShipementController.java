@@ -7,6 +7,7 @@ import com.example.inventaire.entity.Shipment;
 import com.example.inventaire.service.implementation.ShipmentService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,7 +29,7 @@ public class ShipementController {
 
 
     @PostMapping(value = "/shipsample/")
-    public SampleLine ShipSamplecont(@RequestBody SampleLine sampleLine, Location location, DfStatus dfStatus) {
+    public SampleLine ShipSamplecont(@Valid @RequestBody SampleLine sampleLine, Location location, DfStatus dfStatus) {
 
         return shipmentService.ShipSample(sampleLine,location,dfStatus);
     }

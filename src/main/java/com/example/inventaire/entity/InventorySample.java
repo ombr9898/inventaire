@@ -8,8 +8,10 @@ import lombok.Setter;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,11 +22,12 @@ public class InventorySample {
     @Id
     @GeneratedValue
     private Long id;
-    @NotBlank(message = "Inventory is required")
+    @NotNull
+    @Relationship(type = "INVENTORY_SAMPLE_WITH", direction = Relationship.Direction.OUTGOING)
 
     private Inventory inventory;
-    @NotBlank(message = "SampleLines is required")
-
+    @NotNull
+    @Relationship(type = "INVENTORY_SAMPLE_OF", direction = Relationship.Direction.OUTGOING)
     private SampleLine sampleLine;
     private InventoryCheck inventoryChecked1=InventoryCheck.NOT_LOCATED;
     private InventoryCheck inventoryChecked2=InventoryCheck.NOT_LOCATED;

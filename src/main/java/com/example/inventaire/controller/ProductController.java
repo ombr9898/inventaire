@@ -6,6 +6,7 @@ import com.example.inventaire.service.implementation.ProductService;
 import com.example.inventaire.service.implementation.TypeService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 @RestController
 public class ProductController {
@@ -20,9 +21,9 @@ public class ProductController {
         return productService.getProduct(id);
     }
     @PostMapping(value = "/product")
-    public  Product createProduct(@RequestBody  Product  product){return productService.addProduct(product);}
+    public  Product createProduct(@Valid @RequestBody  Product  product){return productService.addProduct(product);}
     @PutMapping(value= "/product")
-    public   Product updateProduct(@RequestBody Long id,  Product product){return productService.updateProduct(id, product);}
+    public   Product updateProduct(@Valid @RequestBody Long id,  Product product){return productService.updateProduct(id, product);}
     @DeleteMapping(value = "/productDelete/{id}")
     public  String deleteProduct(@PathVariable("id") Long id){
         productService.deleteProduct(id);

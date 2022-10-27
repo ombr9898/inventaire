@@ -34,9 +34,7 @@ public class TypeService implements TypeServiceContrat {
 
     @Override
     public List<Type> getTypes() {
-        Type type1 = new Type();
-        type1.setFormFactor("DIL");
-        typeRepository.save(type1);
+
         return typeRepository.findAll();
     }
 

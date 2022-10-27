@@ -5,6 +5,7 @@ import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.service.implementation.SampleLineService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,15 +22,15 @@ public class SampleLineController {
     @GetMapping(value = "/sampleline")
     public List<SampleLine> getAllSampleLine(){return sampleLineService.getAllSampleLines();}
     @PostMapping(value = "/sampleline")
-    public  SampleLine addSampleLine(@RequestBody SampleLine sampleLine){return sampleLineService.addSampleLine(sampleLine);}
+    public  SampleLine addSampleLine(@Valid @RequestBody SampleLine sampleLine){return sampleLineService.addSampleLine(sampleLine);}
 
     @PutMapping(value = "/sampleline")
-    public  SampleLine updateSampleLine(@RequestBody Long id,SampleLine sampleLine){return sampleLineService.updateSampleLine(id,sampleLine);}
+    public  SampleLine updateSampleLine(@Valid @RequestBody Long id,SampleLine sampleLine){return sampleLineService.updateSampleLine(id,sampleLine);}
 
     @PostMapping(value="/takesample")
-            public List<SampleLine> takeSampleLines(List<SampleLine> sampleLineList){return sampleLineService.takeSampleLines(sampleLineList);}
+            public List<SampleLine> takeSampleLines(@RequestBody List<SampleLine> sampleLineList){return sampleLineService.takeSampleLines(sampleLineList);}
     @PostMapping(value = "returnsample")
-    public List<SampleLine> returnSampleLines(List<SampleLine> sampleLineList){return sampleLineService.returnSampleLines(sampleLineList);}
+    public List<SampleLine> returnSampleLines(@RequestBody List<SampleLine> sampleLineList){return sampleLineService.returnSampleLines(sampleLineList);}
 
     @DeleteMapping(value = "/sampleline/{id}")
     String deleteSampleLine(@PathVariable("id") Long id){sampleLineService.deleteSampleLine(id); return "SampleLine deleted" ;}

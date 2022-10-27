@@ -11,6 +11,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -22,10 +23,10 @@ public class Box {
     @Id
     @GeneratedValue
     private Long id;
-    @NotBlank(message = "Location is required")
+    @NotNull
     private Location location;
     private String comment;
-    @NotBlank(message = "State is required")
+    @NotNull
     private State state=State.SEALED;
     private Date dateOfCreation;
     private Date dateOfUpdated;

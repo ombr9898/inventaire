@@ -9,6 +9,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +20,6 @@ public class Product {
     @Id
     @GeneratedValue
     private Long id;
-    @NotBlank(message = "The name of the product is required")
+    @NotNull
     private String nameOfProduct ;
 }

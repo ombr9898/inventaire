@@ -8,6 +8,7 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +21,11 @@ public class Action {
     @Id
     @GeneratedValue
     private Long id;
-    @NotBlank(message = "Type of action is required")
+    @NotNull
     private TypeOfAction typeOfAction ;
     private Date dateOfAction;
     @Relationship(type="ACTION_OF", direction = Relationship.Direction.INCOMING)
-    @NotBlank(message = "SampleLines is required")
+    @NotNull
     private List <SampleLine> listOfSampleLine ;
 
 

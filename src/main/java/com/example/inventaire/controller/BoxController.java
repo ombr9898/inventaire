@@ -4,6 +4,7 @@ import com.example.inventaire.entity.Box;
 import com.example.inventaire.service.implementation.BoxService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +25,9 @@ public class BoxController {
         return boxService.getBox(id);
     }
     @PostMapping(value = "/box")
-    public Box createBox(@RequestBody Box box){return boxService.addBox(box);}
+    public Box createBox(@Valid @RequestBody Box box){return boxService.addBox(box);}
     @PutMapping(value= "/box")
-    public  Box updateBox(@RequestBody Long id, Box box){return boxService.updateBox(id, box);}
+    public  Box updateBox(@Valid @RequestBody Long id, Box box){return boxService.updateBox(id, box);}
     @DeleteMapping(value = "/boxDelete/{id}")
     public  String deleteBox(@PathVariable Long id){
         boxService.deleteBox(id);
