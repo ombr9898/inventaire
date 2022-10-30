@@ -10,15 +10,14 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Node("InventorySample")
-public class InventorySample {
+@Node("InventoryProduct")
+public class InventoryProduct {
     @Id
     @GeneratedValue
     private Long id;
