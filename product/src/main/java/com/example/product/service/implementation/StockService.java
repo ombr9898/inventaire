@@ -64,9 +64,12 @@ public class StockService implements StockServiceContrat {
     }
 
     @Override
-    public Integer numberOfProductInStock(Stock stock) {
+    public Integer numberOfProductInStock(Long id) {
+        Stock stock =stockRepository.findById(id).get();
+        System.out.println(stock.getId());
         List<Product> productList= productRepository.findAll();
         productList=productList.stream().filter(product-> product.getStock().getId()== stock.getId()).toList();
+        System.out.println(productList);
 
         return productList.size();
     }

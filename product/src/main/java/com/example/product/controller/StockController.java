@@ -44,8 +44,8 @@ public class StockController {
     public  String deleteStock(@PathVariable Long id){
         stockService.deleteStock(id);
     return "Stock Deleted";}
-    @GetMapping(value = "/stock/numofproduct/{stock}")
-    public Integer numberOfProductInStock(@PathVariable("stock") Stock stock) {
-        return stockService.numberOfProductInStock(stock);
+    @GetMapping(value = "/stock/numofproduct/{id}")
+    public Integer numberOfProductInStock(@PathVariable("id") Long id) {
+        return stockService.numberOfProductInStock(id);
     }
 }

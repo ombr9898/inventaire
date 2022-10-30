@@ -11,7 +11,7 @@ public interface StockServiceContrat {
     Optional<Stock> getStock(Long id);
     List<Stock> getStocks();
     Void deleteStock(Long id);
-    Integer numberOfProductInStock(Stock stock);
+    Integer numberOfProductInStock(Long id);
 
 
 
