@@ -10,7 +10,6 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -30,6 +29,6 @@ public class Shipment {
     private Destination destination;
     @Relationship(type = "SHIPMENT_OF", direction = Relationship.Direction.OUTGOING)
     @NotNull
-    private SampleLine sampleLine;
+    private Product product;
 
 }

@@ -7,7 +7,6 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +25,7 @@ public class Action {
     private Date dateOfAction;
     @Relationship(type="ACTION_OF", direction = Relationship.Direction.INCOMING)
     @NotNull
-    private List <SampleLine> listOfSampleLine ;
+    private List <Product> listOfProduct;
 
 
 }

@@ -1,6 +1,5 @@
 package com.example.inventaire.service.contrat;
 
-import com.example.inventaire.entity.Product;
 import com.example.inventaire.entity.Type;
 
 import java.util.List;

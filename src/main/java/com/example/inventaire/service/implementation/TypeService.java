@@ -1,7 +1,6 @@
 package com.example.inventaire.service.implementation;
 
 import com.example.inventaire.entity.Type;
-import com.example.inventaire.repository.ProductRepository;
 import com.example.inventaire.repository.TypeRepository;
 import com.example.inventaire.service.contrat.TypeServiceContrat;
 import org.springframework.stereotype.Service;

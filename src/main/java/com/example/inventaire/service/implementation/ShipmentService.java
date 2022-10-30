@@ -6,7 +6,7 @@ import com.example.inventaire.entity.EnumOfProject.Location;
 import com.example.inventaire.entity.EnumOfProject.LocationSample;
 import com.example.inventaire.entity.EnumOfProject.TypeOfAction;
 import com.example.inventaire.repository.ActionRepository;
-import com.example.inventaire.repository.SampleLineRepository;
+import com.example.inventaire.repository.ProductRepository;
 import com.example.inventaire.repository.ShipmentRepository;
 import com.example.inventaire.service.contrat.ShipmentServiceContrat;
 import org.springframework.stereotype.Service;
@@ -16,32 +16,32 @@ import java.util.List;
 @Service
 public class ShipmentService implements ShipmentServiceContrat {
     ShipmentRepository shipmentRepository;
-    SampleLineRepository sampleLineRepository;
+    ProductRepository productRepository;
     ActionRepository actionRepository;
 
-    public ShipmentService(ShipmentRepository shipmentRepository, SampleLineRepository sampleLineRepository, ActionRepository actionRepository) {
+    public ShipmentService(ShipmentRepository shipmentRepository, ProductRepository productRepository, ActionRepository actionRepository) {
         this.shipmentRepository = shipmentRepository;
-        this.sampleLineRepository = sampleLineRepository;
+        this.productRepository = productRepository;
         this.actionRepository = actionRepository;
     }
 
     @Override
-    public SampleLine ShipSample(SampleLine sampleLine, Location location, DfStatus dfStatus) {
+    public Product ShipSample(Product product, Location location, DfStatus dfStatus) {
         Action action=new Action();
-        List<SampleLine> sampleLineList=new ArrayList<>();
-        sampleLineList.add(sampleLine);
-        action.setListOfSampleLine(sampleLineList);
+        List<Product> productList =new ArrayList<>();
+        productList.add(product);
+        action.setListOfProduct(productList);
         action.setTypeOfAction(TypeOfAction.MODIFIED);
         actionRepository.save(action);
         Shipment shipment = new Shipment();
-        shipment.setSampleLine(sampleLine);
+        shipment.setProduct(product);
         shipment.setDfStatus(dfStatus);
         shipmentRepository.save(shipment);
-        sampleLine.setComment("Shipped by user");
-        sampleLine.setLocationOfSample(LocationSample.OUTSIDE);
-        sampleLineRepository.save(sampleLine);
+        product.setComment("Shipped by user");
+        product.setLocationOfSample(LocationSample.OUTSIDE);
+        productRepository.save(product);
 
-        return sampleLine;
+        return product;
     }
 
     @Override
@@ -55,13 +55,13 @@ public class ShipmentService implements ShipmentServiceContrat {
     }
 
     @Override
-    public SampleLine returnSampleShipment(Long id) {
+    public Product returnSampleShipment(Long id) {
         Shipment shipment=shipmentRepository.findById(id).get();
-        SampleLine sampleLine=shipment.getSampleLine();
-        sampleLine.setComment("Returned by User");
-        sampleLine.setLocationOfSample(LocationSample.IN_THE_LOCATION);
-        sampleLineRepository.save(sampleLine);
+        Product product =shipment.getProduct();
+        product.setComment("Returned by User");
+        product.setLocationOfSample(LocationSample.IN_THE_LOCATION);
+        productRepository.save(product);
         shipmentRepository.deleteById(id);
-        return sampleLine;
+        return product;
     }
 }

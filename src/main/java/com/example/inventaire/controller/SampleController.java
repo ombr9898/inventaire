@@ -1,7 +1,6 @@
 package com.example.inventaire.controller;
 
 import com.example.inventaire.entity.Sample;
-import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.service.implementation.SampleService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +24,8 @@ public class SampleController {
     @DeleteMapping("/sample/{id}")
     public  String deleteSample(@PathVariable Long id){sampleService.deleteSample(id);
     return "Sample Deleted";}
-    @GetMapping(value = "/sample/numofsampleline/{sample}")
-    public Integer numberOfSampleLineInSample(@PathVariable("sample") Sample sample) {
-        return sampleService.numberOfSampleLineInSample(sample);
+    @GetMapping(value = "/sample/numofproduct/{sample}")
+    public Integer numberOfProductInSample(@PathVariable("sample") Sample sample) {
+        return sampleService.numberOfProductInSample(sample);
     }
 }

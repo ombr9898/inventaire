@@ -27,7 +27,7 @@ public class InventoryProduct {
     private Inventory inventory;
     @NotNull
     @Relationship(type = "INVENTORY_SAMPLE_OF", direction = Relationship.Direction.OUTGOING)
-    private SampleLine sampleLine;
+    private Product product;
     private InventoryCheck inventoryChecked1=InventoryCheck.NOT_LOCATED;
     private InventoryCheck inventoryChecked2=InventoryCheck.NOT_LOCATED;
     private String Comment;

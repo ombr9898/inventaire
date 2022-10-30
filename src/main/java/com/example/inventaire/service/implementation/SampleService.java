@@ -4,9 +4,9 @@ import com.example.inventaire.entity.Action;
 import com.example.inventaire.entity.EnumOfProject.SampleState;
 import com.example.inventaire.entity.EnumOfProject.TypeOfAction;
 import com.example.inventaire.entity.Sample;
-import com.example.inventaire.entity.SampleLine;
+import com.example.inventaire.entity.Product;
 import com.example.inventaire.repository.ActionRepository;
-import com.example.inventaire.repository.SampleLineRepository;
+import com.example.inventaire.repository.ProductRepository;
 import com.example.inventaire.repository.SampleRepository;
 import com.example.inventaire.service.contrat.SampleServiceContrat;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,13 @@ import java.util.List;
 @Service
 public class SampleService implements SampleServiceContrat {
     SampleRepository sampleRepository;
-    SampleLineRepository sampleLineRepository;
+    ProductRepository productRepository;
     ActionRepository actionRepository;
 
 
-    public SampleService(SampleRepository sampleRepository, SampleLineRepository sampleLineRepository, ActionRepository actionRepository) {
+    public SampleService(SampleRepository sampleRepository, ProductRepository productRepository, ActionRepository actionRepository) {
         this.sampleRepository = sampleRepository;
-        this.sampleLineRepository = sampleLineRepository;
+        this.productRepository = productRepository;
         this.actionRepository = actionRepository;
     }
 
@@ -48,21 +48,21 @@ public class SampleService implements SampleServiceContrat {
 
     @Override
     public Void deleteSample(Long id) {
-        List<SampleLine> samplelines= sampleLineRepository.findAll();
-        List<SampleLine> samplelinesOfSample=new ArrayList<>();
-        for (SampleLine sampleline:samplelines
+        List<Product> products= productRepository.findAll();
+        List<Product> productsOfSample=new ArrayList<>();
+        for (Product product:products
              ) {
-            System.out.println(sampleline.getId());
-            if(sampleline.getSample().getId()==id) {
-                sampleline.setStateOfSampleLine(SampleState.DESTROYED);
-                sampleLineRepository.save(sampleline);
-                samplelinesOfSample.add(sampleline);
+            System.out.println(product.getId());
+            if(product.getSample().getId()==id) {
+                product.setStateOfProduct(SampleState.DESTROYED);
+                productRepository.save(product);
+                productsOfSample.add(product);
 
 
             }
         }
         Action action=new Action();
-        action.setListOfSampleLine(samplelinesOfSample);
+        action.setListOfProduct(productsOfSample);
         action.setTypeOfAction(TypeOfAction.TAKED);
         actionRepository.save(action);
         Sample sample=sampleRepository.findById(id).get();
@@ -72,11 +72,11 @@ public class SampleService implements SampleServiceContrat {
     }
 
     @Override
-    public Integer numberOfSampleLineInSample(Sample sample) {
-        List<SampleLine> samplelines= sampleLineRepository.findAll();
-        samplelines=samplelines.stream().filter(sampleLine -> sampleLine.getSample().getId()==sample.getId()).toList();
+    public Integer numberOfProductInSample(Sample sample) {
+        List<Product> productList= productRepository.findAll();
+        productList=productList.stream().filter(product-> product.getSample().getId()==sample.getId()).toList();
 
-        return samplelines.size();
+        return productList.size();
     }
 
 }

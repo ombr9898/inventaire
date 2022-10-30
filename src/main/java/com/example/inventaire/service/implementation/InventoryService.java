@@ -2,10 +2,10 @@ package com.example.inventaire.service.implementation;
 
 import com.example.inventaire.entity.Inventory;
 import com.example.inventaire.entity.InventoryProduct;
-import com.example.inventaire.entity.SampleLine;
+import com.example.inventaire.entity.Product;
 import com.example.inventaire.repository.InventoryRepository;
 import com.example.inventaire.repository.InventoryProductRepository;
-import com.example.inventaire.repository.SampleLineRepository;
+import com.example.inventaire.repository.ProductRepository;
 import com.example.inventaire.service.contrat.InventoryServiceContrat;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +14,12 @@ import java.util.List;
 public class InventoryService implements InventoryServiceContrat {
     InventoryRepository inventoryRepository;
     InventoryProductRepository inventoryProductRepository;
-    SampleLineRepository sampleLineRepository;
+    ProductRepository productRepository;
 
-    public InventoryService(InventoryRepository inventoryRepository, InventoryProductRepository inventoryProductRepository, SampleLineRepository sampleLineRepository) {
+    public InventoryService(InventoryRepository inventoryRepository, InventoryProductRepository inventoryProductRepository, ProductRepository productRepository) {
         this.inventoryRepository = inventoryRepository;
         this.inventoryProductRepository = inventoryProductRepository;
-        this.sampleLineRepository = sampleLineRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -27,11 +27,11 @@ public class InventoryService implements InventoryServiceContrat {
         Inventory inventory=new Inventory();
         inventoryRepository.save(inventory);
 
-        for (SampleLine sampleline:sampleLineRepository.findAll()
+        for (Product product: productRepository.findAll()
              ) {
             InventoryProduct inventoryProduct =new InventoryProduct();
             inventoryProduct.setInventory(inventory);
-            inventoryProduct.setSampleLine(sampleline);
+            inventoryProduct.setProduct(product);
             inventoryProductRepository.save(inventoryProduct);
         }
 

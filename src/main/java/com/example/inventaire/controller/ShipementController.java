@@ -1,7 +1,7 @@
 package com.example.inventaire.controller;
 
 import com.example.inventaire.entity.EnumOfProject.Location;
-import com.example.inventaire.entity.SampleLine;
+import com.example.inventaire.entity.Product;
 import com.example.inventaire.entity.Shipment;
 import com.example.inventaire.service.implementation.ShipmentService;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +28,13 @@ public class ShipementController {
 
 
     @PostMapping(value = "/shipsample/")
-    public SampleLine ShipSamplecont(@Valid @RequestBody Shipment shipment) {
+    public Product ShipSamplecont(@Valid @RequestBody Shipment shipment) {
 
-        return shipmentService.ShipSample(shipment.getSampleLine(),Location.BIG_SAFE,shipment.getDfStatus());
+        return shipmentService.ShipSample(shipment.getProduct(),Location.BIG_SAFE,shipment.getDfStatus());
     }
 
     @PostMapping(value = "/returnshipement/")
-    public SampleLine ReturnSampleShippedCont(@RequestBody Long id) {
+    public Product ReturnSampleShippedCont(@RequestBody Long id) {
         return shipmentService.returnSampleShipment(id);
     }
 

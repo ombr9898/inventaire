@@ -1,10 +1,10 @@
 package com.example.inventaire.service.implementation;
 
 import com.example.inventaire.entity.Location;
+import com.example.inventaire.entity.Product;
 import com.example.inventaire.entity.Sample;
-import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.repository.LocationRepository;
-import com.example.inventaire.repository.SampleLineRepository;
+import com.example.inventaire.repository.ProductRepository;
 import com.example.inventaire.repository.SampleRepository;
 import com.example.inventaire.service.contrat.LocationServiceContrat;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,12 @@ import java.util.List;
 @Service
 public class LocationService implements LocationServiceContrat {
     LocationRepository locationRepository;
-    SampleLineRepository sampleLineRepository;
+    ProductRepository productRepository;
     SampleRepository sampleRepository;
 
-    public LocationService(LocationRepository locationRepository, SampleLineRepository sampleLineRepository, SampleRepository sampleRepository) {
+    public LocationService(LocationRepository locationRepository, ProductRepository productRepository, SampleRepository sampleRepository) {
         this.locationRepository = locationRepository;
-        this.sampleLineRepository = sampleLineRepository;
+        this.productRepository = productRepository;
         this.sampleRepository = sampleRepository;
     }
 
@@ -52,20 +52,21 @@ public class LocationService implements LocationServiceContrat {
     }
 
     @Override
-    public Integer numberOfSampleLineInLocation(Location location) {
+    public Integer numberOfProductInLocation(Location location) {
         List <Sample> samples= sampleRepository.findAll();
         samples=samples.stream().filter(sample -> sample.getLocation().getId()== location.getId()).toList();
-        List<SampleLine> samplelinesSample= sampleLineRepository.findAll();
-        List samplelines=new ArrayList();
+        List<Product> productList= productRepository.findAll();
+        List productListByLocation=new ArrayList();
+        
         for (Sample sample:samples
              ) {
-            List<SampleLine> sampleline=samplelinesSample.stream().filter(sampleLine -> sampleLine.getSample().getId()==sample.getId()).toList();
-            for (int i=0;i<sampleline.size();i++)
+            List<Product> product=productList.stream().filter(productLine ->productLine.getSample().getId()==sample.getId()).toList();
+            for (int i=0;i<product.size();i++)
             {
-                samplelines.add(sampleline.get(i));
+                productListByLocation.add(product.get(i));
             }
         }
-        return samplelines.size();
+        return productListByLocation.size();
     }
 
 }

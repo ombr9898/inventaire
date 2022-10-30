@@ -1,33 +1,39 @@
 package com.example.inventaire.controller;
 
 import com.example.inventaire.entity.Product;
-import com.example.inventaire.entity.Type;
+import com.example.inventaire.entity.Sample;
 import com.example.inventaire.service.implementation.ProductService;
-import com.example.inventaire.service.implementation.TypeService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
 @RestController
 public class ProductController {
     ProductService productService;
-    public  ProductController( ProductService  productService){this.productService= productService;}
-    @GetMapping(value = "/products")
-    public List<Product> getProducts() {
-        return  productService.getProducts();
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
-    @GetMapping(value = "/products/{id}")
-    public  Product getProduct( @PathVariable("id") Long id) {
-        return productService.getProduct(id);
-    }
+    @GetMapping(value = "/productbysample/{sample}")
+    public List<Product> getProductOfSample(@PathVariable("sample") Sample sample){return productService.getProductOfSample(sample);}
+    @GetMapping(value = "/product/{id}")
+    public Product getProduct(@PathVariable("id") Long id){return productService.getProduct(id);}
+    @GetMapping(value = "/product")
+    public List<Product> getAllProduct(){return productService.getAllProducts();}
     @PostMapping(value = "/product")
-    public  Product createProduct(@Valid @RequestBody  Product  product){return productService.addProduct(product);}
-    @PutMapping(value= "/product")
-    public   Product updateProduct(@Valid @RequestBody Long id,  Product product){return productService.updateProduct(id, product);}
-    @DeleteMapping(value = "/productDelete/{id}")
-    public  String deleteProduct(@PathVariable("id") Long id){
-        productService.deleteProduct(id);
-        return "Product Deleted";
-    }
+    public Product addProduct(@Valid @RequestBody Product product){return productService.addProduct(product);}
+
+    @PutMapping(value = "/product")
+    public Product updateProduct(@Valid @RequestBody Long id, Product product){return productService.updateProduct(id, product);}
+
+    @PostMapping(value="/takesample")
+            public List<Product> takeProducts(@RequestBody List<Product> productList){return productService.takeProducts(productList);}
+    @PostMapping(value = "returnsample")
+    public List<Product> returnProducts(@RequestBody List<Product> productList){return productService.returnProducts(productList);}
+
+    @DeleteMapping(value = "/product/{id}")
+    String deleteProduct(@PathVariable("id") Long id){
+        productService.deleteProduct(id); return "Product deleted" ;}
 
 }
