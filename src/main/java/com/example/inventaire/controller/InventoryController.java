@@ -1,6 +1,5 @@
 package com.example.inventaire.controller;
 
-import com.example.inventaire.entity.Box;
 import com.example.inventaire.entity.Inventory;
 import com.example.inventaire.service.implementation.InventoryService;
 import org.springframework.web.bind.annotation.*;

@@ -75,7 +75,7 @@ public class SampleLineService implements SampleLineServiceContrat {
         for (SampleLine sampleLine:
              sampleLineList) {
             sampleLine.setComment("Taked by User");
-            sampleLine.setLocationOfSample(LocationSample.OUT_OF_THE_BOX);
+            sampleLine.setLocationOfSample(LocationSample.OUT_OF_THE_LOCATION);
             sampleLineRepository.save(sampleLine);
         }
         return sampleLineList;
@@ -90,7 +90,7 @@ public class SampleLineService implements SampleLineServiceContrat {
         for (SampleLine sampleLine:
                 sampleLineList) {
             sampleLine.setComment("Returned by User");
-            sampleLine.setLocationOfSample(LocationSample.IN_THE_BOX);
+            sampleLine.setLocationOfSample(LocationSample.IN_THE_LOCATION);
             sampleLineRepository.save(sampleLine);
 
         }

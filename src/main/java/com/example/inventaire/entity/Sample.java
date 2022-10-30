@@ -9,7 +9,6 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
@@ -23,7 +22,7 @@ public class Sample {
     private Long id;
     @Relationship(type = "SAMPLE_IN", direction = Relationship.Direction.OUTGOING)
     @NotNull
-    private Box box;
+    private Location location;
     @Relationship(type = "SAMPLE_DIFFERENT", direction = Relationship.Direction.OUTGOING)
     @NotNull
     private Type type;

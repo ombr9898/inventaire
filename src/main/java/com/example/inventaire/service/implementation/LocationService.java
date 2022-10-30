@@ -1,60 +1,60 @@
 package com.example.inventaire.service.implementation;
 
-import com.example.inventaire.entity.Box;
+import com.example.inventaire.entity.Location;
 import com.example.inventaire.entity.Sample;
 import com.example.inventaire.entity.SampleLine;
-import com.example.inventaire.repository.BoxRepository;
+import com.example.inventaire.repository.LocationRepository;
 import com.example.inventaire.repository.SampleLineRepository;
 import com.example.inventaire.repository.SampleRepository;
-import com.example.inventaire.service.contrat.BoxServiceContrat;
+import com.example.inventaire.service.contrat.LocationServiceContrat;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
-public class BoxService implements BoxServiceContrat {
-    BoxRepository boxRepository;
+public class LocationService implements LocationServiceContrat {
+    LocationRepository locationRepository;
     SampleLineRepository sampleLineRepository;
     SampleRepository sampleRepository;
 
-    public BoxService(BoxRepository boxRepository, SampleLineRepository sampleLineRepository, SampleRepository sampleRepository) {
-        this.boxRepository = boxRepository;
+    public LocationService(LocationRepository locationRepository, SampleLineRepository sampleLineRepository, SampleRepository sampleRepository) {
+        this.locationRepository = locationRepository;
         this.sampleLineRepository = sampleLineRepository;
         this.sampleRepository = sampleRepository;
     }
 
     @Override
-    public Box addBox(Box box) {
-        return boxRepository.save(box);
+    public Location addLocation(Location location) {
+        return locationRepository.save(location);
     }
 
     @Override
-    public Box updateBox(Long id, Box box) {
-        box.setId(id);
-        boxRepository.save(box);
-        return  box;
+    public Location updateLocation(Long id, Location location) {
+        location.setId(id);
+        locationRepository.save(location);
+        return location;
     }
 
     @Override
-    public Box getBox(Long id) {
-        return boxRepository.findById(id).get() ;
+    public Location getLocation(Long id) {
+        return locationRepository.findById(id).get() ;
     }
 
     @Override
-    public List<Box> getBoxes() {
-        return boxRepository.findAll();
+    public List<Location> getLocationes() {
+        return locationRepository.findAll();
     }
 
     @Override
-    public Void deleteBox(Long id) {
-        boxRepository.deleteById(id);
+    public Void deleteLocation(Long id) {
+        locationRepository.deleteById(id);
         return null;
     }
 
     @Override
-    public Integer numberOfSampleLineInBox(Box box) {
+    public Integer numberOfSampleLineInLocation(Location location) {
         List <Sample> samples= sampleRepository.findAll();
-        samples=samples.stream().filter(sample -> sample.getBox().getId()==box.getId()).toList();
+        samples=samples.stream().filter(sample -> sample.getLocation().getId()== location.getId()).toList();
         List<SampleLine> samplelinesSample= sampleLineRepository.findAll();
         List samplelines=new ArrayList();
         for (Sample sample:samples

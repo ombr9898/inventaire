@@ -59,7 +59,7 @@ public class ShipmentService implements ShipmentServiceContrat {
         Shipment shipment=shipmentRepository.findById(id).get();
         SampleLine sampleLine=shipment.getSampleLine();
         sampleLine.setComment("Returned by User");
-        sampleLine.setLocationOfSample(LocationSample.IN_THE_BOX);
+        sampleLine.setLocationOfSample(LocationSample.IN_THE_LOCATION);
         sampleLineRepository.save(sampleLine);
         shipmentRepository.deleteById(id);
         return sampleLine;

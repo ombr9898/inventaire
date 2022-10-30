@@ -34,5 +34,5 @@ public class SampleLine {
     private Sample sample;
     private String comment;
     @NotNull
-    private LocationSample locationOfSample=LocationSample.IN_THE_BOX ;
+    private LocationSample locationOfSample=LocationSample.IN_THE_LOCATION ;
 }

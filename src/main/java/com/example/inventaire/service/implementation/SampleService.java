@@ -1,7 +1,6 @@
 package com.example.inventaire.service.implementation;
 
 import com.example.inventaire.entity.Action;
-import com.example.inventaire.entity.Box;
 import com.example.inventaire.entity.EnumOfProject.SampleState;
 import com.example.inventaire.entity.EnumOfProject.TypeOfAction;
 import com.example.inventaire.entity.Sample;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SampleService implements SampleServiceContrat {

@@ -1,6 +1,5 @@
 package com.example.inventaire.controller;
 
-import com.example.inventaire.entity.EnumOfProject.DfStatus;
 import com.example.inventaire.entity.EnumOfProject.Location;
 import com.example.inventaire.entity.SampleLine;
 import com.example.inventaire.entity.Shipment;
@@ -29,9 +28,9 @@ public class ShipementController {
 
 
     @PostMapping(value = "/shipsample/")
-    public SampleLine ShipSamplecont(@Valid @RequestBody SampleLine sampleLine, Location location, DfStatus dfStatus) {
+    public SampleLine ShipSamplecont(@Valid @RequestBody Shipment shipment) {
 
-        return shipmentService.ShipSample(sampleLine,location,dfStatus);
+        return shipmentService.ShipSample(shipment.getSampleLine(),Location.BIG_SAFE,shipment.getDfStatus());
     }
 
     @PostMapping(value = "/returnshipement/")
