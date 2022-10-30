@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Node;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -16,17 +14,20 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Node("Location")
+@Entity
+@Table(name = "location")
 public class Location {
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
-    @NotNull
-    private Location location;
+    @Column(name = "comment")
     private String comment;
-    @NotNull
-    private State state=State.SEALED;
+    @Column(name = "state",nullable = false)
+    private State state;
+    @Column(name = "date_c")
     private Date dateOfCreation;
+    @Column(name = "date_u")
     private Date dateOfUpdated;
 
 }

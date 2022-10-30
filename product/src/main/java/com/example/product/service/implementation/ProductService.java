@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ProductService implements ProductServiceContrat {
     ProductRepository productRepository;
@@ -44,8 +46,8 @@ public class ProductService implements ProductServiceContrat {
     }
 
     @Override
-    public Product getProduct(Long id) {
-        return productRepository.findById(id).get();
+    public Optional<Product> getProduct(Long id) {
+        return productRepository.findById(id);
     }
 
     @Override

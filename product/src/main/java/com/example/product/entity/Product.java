@@ -2,35 +2,36 @@ package com.example.product.entity;
 
 import com.example.product.entity.EnumOfProject.LocationStock;
 import com.example.product.entity.EnumOfProject.StockState;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Relationship;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Node("Product")
+@Entity
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
-    @LastModifiedDate
+    @Column(name = "date")
     private Date dateEntered ;
     @NotNull
+    @Column(name = "stock_state")
     private StockState stateOfProduct=StockState.OK;
-    @Relationship(type = "PRODUCT_OF", direction = Relationship.Direction.OUTGOING)
+    @ManyToOne
+    @JoinColumn(name = "stock_id")
     @NotNull
     private Stock stock;
+    @Column(name = "comment")
     private String comment;
     @NotNull
+    @Column(name = "location_stock")
     private LocationStock locationOfStock=LocationStock.IN_THE_LOCATION ;
 }

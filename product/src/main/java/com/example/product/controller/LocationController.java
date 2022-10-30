@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class LocationController {
@@ -15,12 +16,12 @@ public class LocationController {
         this.LocationService = LocationService;
     }
 
-    @GetMapping(value = "/locationes")
-    public List<Location> getLocationes() {
-        return LocationService.getLocationes();
+    @GetMapping(value = "/location")
+    public List<Location> getLocation() {
+        return LocationService.getLocation();
     }
-    @GetMapping(value = "/locationes/{id}")
-    public Location getLocation(@PathVariable("id") Long id) {
+    @GetMapping(value = "/location/{id}")
+    public Optional<Location> getLocation(@PathVariable("id") Long id) {
         return LocationService.getLocation(id);
     }
     @PostMapping(value = "/location")

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class LocationService implements LocationServiceContrat {
     LocationRepository locationRepository;
@@ -36,12 +38,12 @@ public class LocationService implements LocationServiceContrat {
     }
 
     @Override
-    public Location getLocation(Long id) {
-        return locationRepository.findById(id).get() ;
+    public Optional<Location> getLocation(Long id) {
+        return locationRepository.findById(id) ;
     }
 
     @Override
-    public List<Location> getLocationes() {
+    public List<Location> getLocation() {
         return locationRepository.findAll();
     }
 

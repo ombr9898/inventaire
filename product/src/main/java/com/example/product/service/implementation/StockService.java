@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StockService implements StockServiceContrat {
@@ -30,8 +31,8 @@ public class StockService implements StockServiceContrat {
 
 
     @Override
-    public Stock getStock(Long id) {
-        return stockRepository.findById(id).get();
+    public Optional<Stock> getStock(Long id) {
+        return stockRepository.findById(id);
     }
 
     @Override

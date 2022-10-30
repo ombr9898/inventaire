@@ -1,33 +1,26 @@
 package com.example.product.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Relationship;
+import lombok.*;
 
-import javax.validation.constraints.NotNull;
-
+import javax.persistence.*;
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Node("Stock")
+@Entity
+@Table(name = "stock")
 public class Stock {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
-    @Relationship(type = "STOCK_IN", direction = Relationship.Direction.OUTGOING)
-    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "location_id",nullable = false)
     private Location location;
-    @Relationship(type = "STOCK_DIFFERENT", direction = Relationship.Direction.OUTGOING)
-    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "type_id",nullable = false)
     private Type type;
-    @NotNull
-    @Relationship(type = "STOCK_AS", direction = Relationship.Direction.OUTGOING)
-    private Product product;
+    @Column(name = "delete_stock")
     private Boolean deleteStock = Boolean.FALSE;
 }
