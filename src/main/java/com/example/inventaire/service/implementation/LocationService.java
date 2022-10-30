@@ -2,10 +2,10 @@ package com.example.inventaire.service.implementation;
 
 import com.example.inventaire.entity.Location;
 import com.example.inventaire.entity.Product;
-import com.example.inventaire.entity.Sample;
+import com.example.inventaire.entity.Stock;
 import com.example.inventaire.repository.LocationRepository;
 import com.example.inventaire.repository.ProductRepository;
-import com.example.inventaire.repository.SampleRepository;
+import com.example.inventaire.repository.StockRepository;
 import com.example.inventaire.service.contrat.LocationServiceContrat;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,12 @@ import java.util.List;
 public class LocationService implements LocationServiceContrat {
     LocationRepository locationRepository;
     ProductRepository productRepository;
-    SampleRepository sampleRepository;
+    StockRepository stockRepository;
 
-    public LocationService(LocationRepository locationRepository, ProductRepository productRepository, SampleRepository sampleRepository) {
+    public LocationService(LocationRepository locationRepository, ProductRepository productRepository, StockRepository stockRepository) {
         this.locationRepository = locationRepository;
         this.productRepository = productRepository;
-        this.sampleRepository = sampleRepository;
+        this.stockRepository = stockRepository;
     }
 
     @Override
@@ -53,14 +53,14 @@ public class LocationService implements LocationServiceContrat {
 
     @Override
     public Integer numberOfProductInLocation(Location location) {
-        List <Sample> samples= sampleRepository.findAll();
-        samples=samples.stream().filter(sample -> sample.getLocation().getId()== location.getId()).toList();
+        List <Stock> stocks = stockRepository.findAll();
+        stocks = stocks.stream().filter(stock -> stock.getLocation().getId()== location.getId()).toList();
         List<Product> productList= productRepository.findAll();
         List productListByLocation=new ArrayList();
         
-        for (Sample sample:samples
+        for (Stock stock : stocks
              ) {
-            List<Product> product=productList.stream().filter(productLine ->productLine.getSample().getId()==sample.getId()).toList();
+            List<Product> product=productList.stream().filter(productLine ->productLine.getStock().getId()== stock.getId()).toList();
             for (int i=0;i<product.size();i++)
             {
                 productListByLocation.add(product.get(i));

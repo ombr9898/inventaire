@@ -1,7 +1,7 @@
 package com.example.inventaire.entity;
 
-import com.example.inventaire.entity.EnumOfProject.LocationSample;
-import com.example.inventaire.entity.EnumOfProject.SampleState;
+import com.example.inventaire.entity.EnumOfProject.LocationStock;
+import com.example.inventaire.entity.EnumOfProject.StockState;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,11 +26,11 @@ public class Product {
     @LastModifiedDate
     private Date dateEntered ;
     @NotNull
-    private SampleState stateOfProduct=SampleState.OK;
+    private StockState stateOfProduct=StockState.OK;
     @Relationship(type = "PRODUCT_OF", direction = Relationship.Direction.OUTGOING)
     @NotNull
-    private Sample sample;
+    private Stock stock;
     private String comment;
     @NotNull
-    private LocationSample locationOfSample=LocationSample.IN_THE_LOCATION ;
+    private LocationStock locationOfStock=LocationStock.IN_THE_LOCATION ;
 }

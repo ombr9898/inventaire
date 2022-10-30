@@ -1,11 +1,11 @@
 package com.example.inventaire.service.implementation;
 
 import com.example.inventaire.entity.Action;
-import com.example.inventaire.entity.EnumOfProject.LocationSample;
-import com.example.inventaire.entity.EnumOfProject.SampleState;
+import com.example.inventaire.entity.EnumOfProject.LocationStock;
+import com.example.inventaire.entity.EnumOfProject.StockState;
 import com.example.inventaire.entity.EnumOfProject.TypeOfAction;
 import com.example.inventaire.entity.Product;
-import com.example.inventaire.entity.Sample;
+import com.example.inventaire.entity.Stock;
 import com.example.inventaire.repository.ActionRepository;
 import com.example.inventaire.repository.ProductRepository;
 import com.example.inventaire.service.contrat.ProductServiceContrat;
@@ -36,9 +36,9 @@ public class ProductService implements ProductServiceContrat {
     }
 
     @Override
-    public List<Product> getProductOfSample(Sample sample) {
+    public List<Product> getProductOfStock(Stock stock) {
         List<Product> products= productRepository.findAll();
-        products=products.stream().filter(productLine ->productLine.getSample().getId()==sample.getId()).toList();
+        products=products.stream().filter(productLine ->productLine.getStock().getId()== stock.getId()).toList();
 
 
         return products;
@@ -75,7 +75,7 @@ public class ProductService implements ProductServiceContrat {
         for (Product product :
                 productList) {
             product.setComment("Taked by User");
-            product.setLocationOfSample(LocationSample.OUT_OF_THE_LOCATION);
+            product.setLocationOfStock(LocationStock.OUT_OF_THE_LOCATION);
             productRepository.save(product);
         }
         return productList;
@@ -90,7 +90,7 @@ public class ProductService implements ProductServiceContrat {
         for (Product product :
                 productList) {
             product.setComment("Returned by User");
-            product.setLocationOfSample(LocationSample.IN_THE_LOCATION);
+            product.setLocationOfStock(LocationStock.IN_THE_LOCATION);
             productRepository.save(product);
 
         }
@@ -107,7 +107,7 @@ public class ProductService implements ProductServiceContrat {
         action.setTypeOfAction(TypeOfAction.DELETED);
         actionRepository.save(action);
         Product product = productRepository.findById(id).get();
-        product.setStateOfProduct(SampleState.DESTROYED);
+        product.setStateOfProduct(StockState.DESTROYED);
         productRepository.save(product);
         return null;
     }

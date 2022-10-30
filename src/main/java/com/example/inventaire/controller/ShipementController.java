@@ -27,15 +27,15 @@ public class ShipementController {
 
 
 
-    @PostMapping(value = "/shipsample/")
-    public Product ShipSamplecont(@Valid @RequestBody Shipment shipment) {
+    @PostMapping(value = "/shipstock/")
+    public Product ShipStockcont(@Valid @RequestBody Shipment shipment) {
 
-        return shipmentService.ShipSample(shipment.getProduct(),Location.BIG_SAFE,shipment.getDfStatus());
+        return shipmentService.ShipStock(shipment.getProduct(),Location.BIG_SAFE,shipment.getDfStatus());
     }
 
     @PostMapping(value = "/returnshipement/")
-    public Product ReturnSampleShippedCont(@RequestBody Long id) {
-        return shipmentService.returnSampleShipment(id);
+    public Product ReturnStockShippedCont(@RequestBody Long id) {
+        return shipmentService.returnStockShipment(id);
     }
 
 }

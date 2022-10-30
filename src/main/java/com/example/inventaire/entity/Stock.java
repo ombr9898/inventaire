@@ -15,19 +15,19 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Getter
 @Setter
-@Node("Sample")
-public class Sample {
+@Node("Stock")
+public class Stock {
     @Id
     @GeneratedValue
     private Long id;
-    @Relationship(type = "SAMPLE_IN", direction = Relationship.Direction.OUTGOING)
+    @Relationship(type = "STOCK_IN", direction = Relationship.Direction.OUTGOING)
     @NotNull
     private Location location;
-    @Relationship(type = "SAMPLE_DIFFERENT", direction = Relationship.Direction.OUTGOING)
+    @Relationship(type = "STOCK_DIFFERENT", direction = Relationship.Direction.OUTGOING)
     @NotNull
     private Type type;
     @NotNull
-    @Relationship(type = "SAMPLE_AS", direction = Relationship.Direction.OUTGOING)
+    @Relationship(type = "STOCK_AS", direction = Relationship.Direction.OUTGOING)
     private Product product;
-    private Boolean deleteSample=Boolean.FALSE;
+    private Boolean deleteStock=Boolean.FALSE;
 }

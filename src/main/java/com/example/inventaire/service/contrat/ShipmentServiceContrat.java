@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface ShipmentServiceContrat {
 
-    Product ShipSample(Product product, Location location, DfStatus dfStatus);
+    Product ShipStock(Product product, Location location, DfStatus dfStatus);
     Shipment getShipment(Long id);
     List<Shipment> getShipments();
-    Product returnSampleShipment(Long id);
+    Product returnStockShipment(Long id);
 
 
 

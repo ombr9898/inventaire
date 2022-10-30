@@ -22,11 +22,11 @@ public class InventoryProduct {
     @GeneratedValue
     private Long id;
     @NotNull
-    @Relationship(type = "INVENTORY_SAMPLE_WITH", direction = Relationship.Direction.OUTGOING)
+    @Relationship(type = "INVENTORY_STOCK_WITH", direction = Relationship.Direction.OUTGOING)
 
     private Inventory inventory;
     @NotNull
-    @Relationship(type = "INVENTORY_SAMPLE_OF", direction = Relationship.Direction.OUTGOING)
+    @Relationship(type = "INVENTORY_STOCK_OF", direction = Relationship.Direction.OUTGOING)
     private Product product;
     private InventoryCheck inventoryChecked1=InventoryCheck.NOT_LOCATED;
     private InventoryCheck inventoryChecked2=InventoryCheck.NOT_LOCATED;

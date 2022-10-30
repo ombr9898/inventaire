@@ -1,13 +1,13 @@
 package com.example.inventaire.service.contrat;
 
 import com.example.inventaire.entity.Product;
-import com.example.inventaire.entity.Sample;
+import com.example.inventaire.entity.Stock;
 
 import java.util.List;
 
 public interface ProductServiceContrat {
     Product addProduct(Product product);
-    List<Product> getProductOfSample(Sample sample);
+    List<Product> getProductOfStock(Stock stock);
     Product updateProduct(Long id, Product product);
     Product getProduct(Long id);
     List<Product> getAllProducts();

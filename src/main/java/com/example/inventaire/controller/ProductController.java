@@ -1,7 +1,7 @@
 package com.example.inventaire.controller;
 
 import com.example.inventaire.entity.Product;
-import com.example.inventaire.entity.Sample;
+import com.example.inventaire.entity.Stock;
 import com.example.inventaire.service.implementation.ProductService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +15,8 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    @GetMapping(value = "/productbysample/{sample}")
-    public List<Product> getProductOfSample(@PathVariable("sample") Sample sample){return productService.getProductOfSample(sample);}
+    @GetMapping(value = "/productbystock/{stock}")
+    public List<Product> getProductOfStock(@PathVariable("stock") Stock stock){return productService.getProductOfStock(stock);}
     @GetMapping(value = "/product/{id}")
     public Product getProduct(@PathVariable("id") Long id){return productService.getProduct(id);}
     @GetMapping(value = "/product")
@@ -27,9 +27,9 @@ public class ProductController {
     @PutMapping(value = "/product")
     public Product updateProduct(@Valid @RequestBody Long id, Product product){return productService.updateProduct(id, product);}
 
-    @PostMapping(value="/takesample")
+    @PostMapping(value="/takestock")
             public List<Product> takeProducts(@RequestBody List<Product> productList){return productService.takeProducts(productList);}
-    @PostMapping(value = "returnsample")
+    @PostMapping(value = "returnstock")
     public List<Product> returnProducts(@RequestBody List<Product> productList){return productService.returnProducts(productList);}
 
     @DeleteMapping(value = "/product/{id}")

@@ -3,7 +3,7 @@ package com.example.inventaire.service.implementation;
 import com.example.inventaire.entity.*;
 import com.example.inventaire.entity.EnumOfProject.DfStatus;
 import com.example.inventaire.entity.EnumOfProject.Location;
-import com.example.inventaire.entity.EnumOfProject.LocationSample;
+import com.example.inventaire.entity.EnumOfProject.LocationStock;
 import com.example.inventaire.entity.EnumOfProject.TypeOfAction;
 import com.example.inventaire.repository.ActionRepository;
 import com.example.inventaire.repository.ProductRepository;
@@ -26,7 +26,7 @@ public class ShipmentService implements ShipmentServiceContrat {
     }
 
     @Override
-    public Product ShipSample(Product product, Location location, DfStatus dfStatus) {
+    public Product ShipStock(Product product, Location location, DfStatus dfStatus) {
         Action action=new Action();
         List<Product> productList =new ArrayList<>();
         productList.add(product);
@@ -38,7 +38,7 @@ public class ShipmentService implements ShipmentServiceContrat {
         shipment.setDfStatus(dfStatus);
         shipmentRepository.save(shipment);
         product.setComment("Shipped by user");
-        product.setLocationOfSample(LocationSample.OUTSIDE);
+        product.setLocationOfStock(LocationStock.OUTSIDE);
         productRepository.save(product);
 
         return product;
@@ -55,11 +55,11 @@ public class ShipmentService implements ShipmentServiceContrat {
     }
 
     @Override
-    public Product returnSampleShipment(Long id) {
+    public Product returnStockShipment(Long id) {
         Shipment shipment=shipmentRepository.findById(id).get();
         Product product =shipment.getProduct();
         product.setComment("Returned by User");
-        product.setLocationOfSample(LocationSample.IN_THE_LOCATION);
+        product.setLocationOfStock(LocationStock.IN_THE_LOCATION);
         productRepository.save(product);
         shipmentRepository.deleteById(id);
         return product;
