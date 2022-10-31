@@ -3,13 +3,13 @@ package com.example.product.service.implementation;
 import com.example.product.entity.EnumOfProject.StockState;
 import com.example.product.entity.Product;
 import com.example.product.entity.Stock;
-import com.example.product.repository.ProductRepository;
 import com.example.product.repository.StockRepository;
 import com.example.product.service.contrat.StockServiceContrat;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -31,12 +31,15 @@ public class StockService implements StockServiceContrat {
 
     @Override
     public Optional<Stock> getStock(Long id) {
+
         return stockRepository.findById(id);
     }
 
     @Override
     public List<Stock> getStocks() {
-        return stockRepository.findAll();
+        List<Stock> stocks=stockRepository.findAll();
+        stocks=stocks.stream().filter(stock -> stock.getDeleteStock()==Boolean.FALSE).toList();
+        return stocks;
     }
 
 
@@ -46,7 +49,7 @@ public class StockService implements StockServiceContrat {
         List<Product> productsOfStock = new ArrayList<>();
         for (Product product : products) {
             System.out.println(product.getId());
-            if (product.getStock().getId() == id) {
+            if (Objects.equals(product.getStock().getId(), id)) {
                 product.setStateOfProduct(StockState.DESTROYED);
                 productService.addProduct(product);
                 productsOfStock.add(product);
@@ -60,10 +63,8 @@ public class StockService implements StockServiceContrat {
     @Override
     public Integer numberOfProductInStock(Long id) {
         Stock stock = stockRepository.findById(id).get();
-        System.out.println(stock.getId());
         List<Product> productList = productService.getAllProducts();
-        productList = productList.stream().filter(product -> product.getStock().getId() == stock.getId()).toList();
-        System.out.println(productList);
+        productList = productList.stream().filter(product -> Objects.equals(product.getStock().getId(), stock.getId())).toList();
 
         return productList.size();
     }

@@ -13,13 +13,9 @@ import java.util.Optional;
 
 @RestController
 public class StockController {
-    final
     StockService stockService;
-    final
     ModelMapper modelMapper;
-    final
     TypeService typeService;
-    final
     LocationService locationService;
 
     public StockController(StockService stockService, ModelMapper modelMapper, TypeService typeService, LocationService locationService) {
@@ -51,6 +47,8 @@ public class StockController {
         Stock stock = convertToEntity(stockDto);
         return stockService.addStock(stock);
     }
+
+
 
     @DeleteMapping("/stock/{id}")
     public String deleteStock(@PathVariable Long id) {

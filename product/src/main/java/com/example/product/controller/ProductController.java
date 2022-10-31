@@ -56,20 +56,14 @@ public class ProductController {
         return productService.addProduct(product);
     }
 
-    @PutMapping(value = "/product")
-    public Product updateProduct(@Valid @RequestBody Long id, Product product) {
+    @PutMapping(value = "/product/{id}")
+    public Product updateProduct(@Valid  @PathVariable("id") Long id,@RequestBody ProductDto productDto) {
+        Product product = convertToEntity(productDto);
         return productService.updateProduct(id, product);
     }
 
-    @PostMapping(value = "/takestock")
-    public List<Product> takeProducts(@RequestBody List<Product> productList) {
-        return productService.takeProducts(productList);
-    }
 
-    @PostMapping(value = "returnstock")
-    public List<Product> returnProducts(@RequestBody List<Product> productList) {
-        return productService.returnProducts(productList);
-    }
+
 
     @DeleteMapping(value = "/product/{id}")
     String deleteProduct(@PathVariable("id") Long id) {

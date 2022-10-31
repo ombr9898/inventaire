@@ -17,9 +17,6 @@ public interface ProductServiceContrat {
 
     List<Product> getAllProducts();
 
-    List<Product> takeProducts(List<Product> productList);
-
-    List<Product> returnProducts(List<Product> productList);
 
     void deleteProduct(Long id);
 }

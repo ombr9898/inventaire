@@ -4,13 +4,12 @@ import com.example.product.entity.Location;
 import com.example.product.entity.Product;
 import com.example.product.entity.Stock;
 import com.example.product.repository.LocationRepository;
-import com.example.product.repository.ProductRepository;
-import com.example.product.repository.StockRepository;
 import com.example.product.service.contrat.LocationServiceContrat;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -39,7 +38,7 @@ public class LocationService implements LocationServiceContrat {
 
     @Override
     public Optional<Location> getLocation(Long id) {
-        return locationRepository.findById(id) ;
+        return locationRepository.findById(id);
     }
 
     @Override
@@ -55,16 +54,15 @@ public class LocationService implements LocationServiceContrat {
 
     @Override
     public Integer numberOfProductInLocation(Long id) {
-        List <Stock> stocks = stockService.getStocks();
-        stocks = stocks.stream().filter(stock -> stock.getLocation().getId()== id).toList();
-        List<Product> productList= productService.getAllProducts();
-        List productListByLocation=new ArrayList();
-        
+        List<Stock> stocks = stockService.getStocks();
+        stocks = stocks.stream().filter(stock -> stock.getLocation().getId() == id).toList();
+        List<Product> productList = productService.getAllProducts();
+        List productListByLocation = new ArrayList();
+
         for (Stock stock : stocks
-             ) {
-            List<Product> product=productList.stream().filter(productLine ->productLine.getStock().getId()== stock.getId()).toList();
-            for (int i=0;i<product.size();i++)
-            {
+        ) {
+            List<Product> product = productList.stream().filter(productLine -> Objects.equals(productLine.getStock().getId(), stock.getId())).toList();
+            for (int i = 0; i < product.size(); i++) {
                 productListByLocation.add(product.get(i));
             }
         }

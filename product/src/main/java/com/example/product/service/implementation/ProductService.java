@@ -1,6 +1,5 @@
 package com.example.product.service.implementation;
 
-import com.example.product.entity.EnumOfProject.LocationStock;
 import com.example.product.entity.EnumOfProject.StockState;
 import com.example.product.entity.Product;
 import com.example.product.entity.Stock;
@@ -23,15 +22,15 @@ public class ProductService implements ProductServiceContrat {
 
     @Override
     public Product addProduct(Product product) {
-        List<Product> productList =new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         productList.add(product);
         return productRepository.save(product);
     }
 
     @Override
     public List<Product> getProductOfStock(Stock stock) {
-        List<Product> products= productRepository.findAll();
-        products=products.stream().filter(productLine ->productLine.getStock().getId()== stock.getId()).toList();
+        List<Product> products = getAllProducts();
+        products = products.stream().filter(productLine -> productLine.getStock().getId() == stock.getId()).toList();
 
 
         return products;
@@ -39,10 +38,10 @@ public class ProductService implements ProductServiceContrat {
 
     @Override
     public Product updateProduct(Long id, Product product) {
-        List<Product> productList =new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         productList.add(product);
         product.setId(id);
-        return productRepository.save(product) ;
+        return productRepository.save(product);
     }
 
     @Override
@@ -52,36 +51,16 @@ public class ProductService implements ProductServiceContrat {
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
 
-    @Override
-    public List<Product> takeProducts(List<Product> productList) {
-        for (Product product :
-                productList) {
-            product.setComment("Taked by User");
-            product.setLocationOfStock(LocationStock.OUT_OF_THE_LOCATION);
-            productRepository.save(product);
-        }
-        return productList;
-    }
-
-    @Override
-    public List<Product> returnProducts(List<Product> productList) {
-        for (Product product :
-                productList) {
-            product.setComment("Returned by User");
-            product.setLocationOfStock(LocationStock.IN_THE_LOCATION);
-            productRepository.save(product);
-
-        }
-        return productList;
+        List<Product> products = productRepository.findAll();
+        products = products.stream().filter(product -> product.getStateOfProduct() == StockState.OK).toList();
+        return products;
     }
 
 
     @Override
     public void deleteProduct(Long id) {
-        List<Product> productList =new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         productList.add(productRepository.findById(id).get());
         Product product = productRepository.findById(id).get();
         product.setStateOfProduct(StockState.DESTROYED);
