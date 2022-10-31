@@ -6,7 +6,6 @@ import com.example.product.service.implementation.LocationService;
 import com.example.product.service.implementation.StockService;
 import com.example.product.service.implementation.TypeService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,14 +13,22 @@ import java.util.Optional;
 
 @RestController
 public class StockController {
-    @Autowired
+    final
     StockService stockService;
-    @Autowired
+    final
     ModelMapper modelMapper;
-    @Autowired
+    final
     TypeService typeService;
-    @Autowired
+    final
     LocationService locationService;
+
+    public StockController(StockService stockService, ModelMapper modelMapper, TypeService typeService, LocationService locationService) {
+        this.stockService = stockService;
+        this.modelMapper = modelMapper;
+        this.typeService = typeService;
+        this.locationService = locationService;
+    }
+
     private Stock convertToEntity(StockDto stockDto) {
         Stock stock = modelMapper.map(stockDto, Stock.class);
         stock.setType(typeService.getType(stockDto.getType()).get());
@@ -29,21 +36,28 @@ public class StockController {
         return stock;
     }
 
-    @GetMapping(value="/stock")
-    public List<Stock> getStock() {return stockService.getStocks();}
+    @GetMapping(value = "/stock")
+    public List<Stock> getStock() {
+        return stockService.getStocks();
+    }
 
-    @GetMapping(value="/stock/{id}")
-    public Optional<Stock> getStock(@PathVariable("id") Long id) {return stockService.getStock(id);}
+    @GetMapping(value = "/stock/{id}")
+    public Optional<Stock> getStock(@PathVariable("id") Long id) {
+        return stockService.getStock(id);
+    }
 
     @PostMapping(value = "/stock")
     public Stock addStock(@RequestBody StockDto stockDto) {
-        Stock stock=convertToEntity(stockDto);
+        Stock stock = convertToEntity(stockDto);
         return stockService.addStock(stock);
     }
+
     @DeleteMapping("/stock/{id}")
-    public  String deleteStock(@PathVariable Long id){
+    public String deleteStock(@PathVariable Long id) {
         stockService.deleteStock(id);
-    return "Stock Deleted";}
+        return "Stock Deleted";
+    }
+
     @GetMapping(value = "/stock/numofproduct/{id}")
     public Integer numberOfProductInStock(@PathVariable("id") Long id) {
         return stockService.numberOfProductInStock(id);

@@ -80,12 +80,11 @@ public class ProductService implements ProductServiceContrat {
 
 
     @Override
-    public Void deleteProduct(Long id) {
+    public void deleteProduct(Long id) {
         List<Product> productList =new ArrayList<>();
         productList.add(productRepository.findById(id).get());
         Product product = productRepository.findById(id).get();
         product.setStateOfProduct(StockState.DESTROYED);
         productRepository.save(product);
-        return null;
     }
 }

@@ -2,10 +2,10 @@ package com.example.product.dto;
 
 import com.example.product.entity.EnumOfProject.LocationStock;
 import com.example.product.entity.EnumOfProject.StockState;
-import com.example.product.entity.Stock;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class ProductDto {
     private Long id;

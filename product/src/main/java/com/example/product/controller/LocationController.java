@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 public class LocationController {
-    LocationService LocationService;
+    final LocationService LocationService;
 
     public LocationController(LocationService LocationService) {
         this.LocationService = LocationService;
@@ -25,9 +25,13 @@ public class LocationController {
         return LocationService.getLocation(id);
     }
     @PostMapping(value = "/location")
-    public Location createLocation(@Valid @RequestBody Location location){return LocationService.addLocation(location);}
+    public Location createLocation(@Valid @RequestBody Location location){
+        return LocationService.addLocation(location);
+    }
     @PutMapping(value= "/location")
-    public Location updateLocation(@Valid @RequestBody Long id, Location location){return LocationService.updateLocation(id, location);}
+    public Location updateLocation(@Valid @RequestBody Long id, Location location){
+        return LocationService.updateLocation(id, location);
+    }
     @DeleteMapping(value = "/locationDelete/{id}")
     public  String deleteLocation(@PathVariable Long id){
         LocationService.deleteLocation(id);

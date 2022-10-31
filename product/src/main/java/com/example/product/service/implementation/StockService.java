@@ -29,7 +29,6 @@ public class StockService implements StockServiceContrat {
     }
 
 
-
     @Override
     public Optional<Stock> getStock(Long id) {
         return stockRepository.findById(id);
@@ -41,15 +40,14 @@ public class StockService implements StockServiceContrat {
     }
 
 
-
     @Override
-    public Void deleteStock(Long id) {
-        List<Product> products= productRepository.findAll();
-        List<Product> productsOfStock=new ArrayList<>();
-        for (Product product:products
-             ) {
+    public void deleteStock(Long id) {
+        List<Product> products = productRepository.findAll();
+        List<Product> productsOfStock = new ArrayList<>();
+        for (Product product : products
+        ) {
             System.out.println(product.getId());
-            if(product.getStock().getId()==id) {
+            if (product.getStock().getId() == id) {
                 product.setStateOfProduct(StockState.DESTROYED);
                 productRepository.save(product);
                 productsOfStock.add(product);
@@ -60,15 +58,14 @@ public class StockService implements StockServiceContrat {
         Stock stock = stockRepository.findById(id).get();
         stock.setDeleteStock(Boolean.TRUE);
         stockRepository.save(stock);
-        return null;
     }
 
     @Override
     public Integer numberOfProductInStock(Long id) {
-        Stock stock =stockRepository.findById(id).get();
+        Stock stock = stockRepository.findById(id).get();
         System.out.println(stock.getId());
-        List<Product> productList= productRepository.findAll();
-        productList=productList.stream().filter(product-> product.getStock().getId()== stock.getId()).toList();
+        List<Product> productList = productRepository.findAll();
+        productList = productList.stream().filter(product -> product.getStock().getId() == stock.getId()).toList();
         System.out.println(productList);
 
         return productList.size();

@@ -1,7 +1,5 @@
 package com.example.product.dto;
 
-import com.example.product.entity.Location;
-import com.example.product.entity.Type;
 import lombok.Data;
 
 @Data

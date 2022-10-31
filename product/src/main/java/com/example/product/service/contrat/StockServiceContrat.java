@@ -8,12 +8,14 @@ import java.util.Optional;
 
 public interface StockServiceContrat {
     Stock addStock(Stock stock);
+
     Optional<Stock> getStock(Long id);
+
     List<Stock> getStocks();
-    Void deleteStock(Long id);
+
+    void deleteStock(Long id);
+
     Integer numberOfProductInStock(Long id);
-
-
 
 
 }

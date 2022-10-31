@@ -8,11 +8,18 @@ import java.util.Optional;
 
 public interface ProductServiceContrat {
     Product addProduct(Product product);
+
     List<Product> getProductOfStock(Stock stock);
+
     Product updateProduct(Long id, Product product);
+
     Optional<Product> getProduct(Long id);
+
     List<Product> getAllProducts();
+
     List<Product> takeProducts(List<Product> productList);
+
     List<Product> returnProducts(List<Product> productList);
-    Void deleteProduct(Long id);
+
+    void deleteProduct(Long id);
 }

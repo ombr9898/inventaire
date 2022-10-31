@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 public class TypeController {
-    TypeService typeService;
+    final TypeService typeService;
 
     public TypeController(TypeService typeService){this.typeService= typeService;}
     @GetMapping(value = "/types")
