@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class ProductService implements ProductServiceContrat {
     ProductRepository productRepository;
 
+    StockService stockService;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, StockService stockService) {
         this.productRepository = productRepository;
+        this.stockService = stockService;
     }
 
     @Override
@@ -28,19 +31,20 @@ public class ProductService implements ProductServiceContrat {
     }
 
     @Override
-    public List<Product> getProductOfStock(Stock stock) {
+    public List<Product> getProductOfStock(Long id) {
         List<Product> products = getAllProducts();
-        products = products.stream().filter(productLine -> productLine.getStock().getId() == stock.getId()).toList();
+        products = products.stream().filter(productLine -> productLine.getStock().getId() == id).toList();
 
 
         return products;
     }
+
+
     public List<Product> getProductOfLocation(Long id) {
         List<Stock> stocks = stockService.getStocks();
         stocks = stocks.stream().filter(stock -> stock.getLocation().getId() == id).toList();
-        List<Product> productList = productService.getAllProducts();
+        List<Product> productList = getAllProducts();
         List productListByLocation = new ArrayList();
-
         for (Stock stock : stocks
         ) {
             List<Product> product = productList.stream().filter(productLine -> Objects.equals(productLine.getStock().getId(), stock.getId())).toList();
@@ -80,5 +84,29 @@ public class ProductService implements ProductServiceContrat {
         Product product = productRepository.findById(id).get();
         product.setStateOfProduct(StockState.DESTROYED);
         productRepository.save(product);
+    }
+    @Override
+    public Integer numberOfProductInStock(Long id) {
+        Stock stock = stockService.getStock(id).get();
+        List<Product> productList = getAllProducts();
+        productList = productList.stream().filter(product -> Objects.equals(product.getStock().getId(), stock.getId())).toList();
+
+        return productList.size();
+    }
+    @Override
+    public Integer numberOfProductInLocation(Long id) {
+        List<Stock> stocks = stockService.getStocks();
+        stocks = stocks.stream().filter(stock -> stock.getLocation().getId() == id).toList();
+        List<Product> productList = getAllProducts();
+        List productListByLocation = new ArrayList();
+
+        for (Stock stock : stocks
+        ) {
+            List<Product> product = productList.stream().filter(productLine -> Objects.equals(productLine.getStock().getId(), stock.getId())).toList();
+            for (int i = 0; i < product.size(); i++) {
+                productListByLocation.add(product.get(i));
+            }
+        }
+        return productListByLocation.size();
     }
 }

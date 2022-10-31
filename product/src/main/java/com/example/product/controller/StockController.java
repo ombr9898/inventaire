@@ -48,7 +48,11 @@ public class StockController {
         return stockService.addStock(stock);
     }
 
-
+    @PutMapping("/stock")
+    public Stock updateStock(@RequestBody StockDto stockDto){
+        Stock stock = convertToEntity(stockDto);
+        return stockService.updateStock(stock);
+    }
 
     @DeleteMapping("/stock/{id}")
     public String deleteStock(@PathVariable Long id) {
@@ -56,8 +60,5 @@ public class StockController {
         return "Stock Deleted";
     }
 
-    @GetMapping(value = "/stock/numofproduct/{id}")
-    public Integer numberOfProductInStock(@PathVariable("id") Long id) {
-        return stockService.numberOfProductInStock(id);
-    }
+
 }

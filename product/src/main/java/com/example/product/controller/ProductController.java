@@ -3,7 +3,6 @@ package com.example.product.controller;
 
 import com.example.product.dto.ProductDto;
 import com.example.product.entity.Product;
-import com.example.product.entity.Stock;
 import com.example.product.service.implementation.ProductService;
 import com.example.product.service.implementation.StockService;
 import org.modelmapper.ModelMapper;
@@ -35,11 +34,11 @@ public class ProductController {
         return product;
     }
 
-    @GetMapping(value = "/productbystock/{stock}")
-    public List<Product> getProductOfStock(@PathVariable("stock") Stock stock) {
-        return productService.getProductOfStock(stock);
+    @GetMapping(value = "/productbystock/{id}")
+    public List<Product> getProductOfStock(@PathVariable("id") Long id) {
+        return productService.getProductOfStock(id);
     }
-    @GetMapping(value = "/productbylocation/{id}}")
+    @GetMapping(value = "/productbylocation/{id}")
     public List<Product> getProductOfLocation(@PathVariable("id") Long id) {
         return productService.getProductOfLocation(id);
     }
@@ -67,12 +66,18 @@ public class ProductController {
     }
 
 
-
-
     @DeleteMapping(value = "/product/{id}")
     String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProduct(id);
         return "Product deleted";
+    }
+    @GetMapping(value = "/product/numinstock/{id}")
+    public Integer numberOfProductInStock(@PathVariable("id") Long id) {
+        return productService.numberOfProductInStock(id);
+    }
+    @GetMapping(value = "/product/numinlocation/{id}")
+    public Integer numberOfProductInLocation(@PathVariable("id") Long id) {
+        return productService.numberOfProductInLocation(id);
     }
 
 }

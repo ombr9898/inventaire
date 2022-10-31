@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface ProductServiceContrat {
     Product addProduct(Product product);
 
-    List<Product> getProductOfStock(Stock stock);
+    List<Product> getProductOfStock(Long id);
 
-    List<Product> getProductOfLocation(Location location);
+    List<Product> getProductOfLocation(Long id);
 
     Product updateProduct(Long id, Product product);
 
@@ -21,4 +21,8 @@ public interface ProductServiceContrat {
 
 
     void deleteProduct(Long id);
+
+    Integer numberOfProductInStock(Long id);
+
+    Integer numberOfProductInLocation(Long id);
 }

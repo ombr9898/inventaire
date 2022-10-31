@@ -3,6 +3,7 @@ package com.example.product.service.implementation;
 import com.example.product.entity.EnumOfProject.StockState;
 import com.example.product.entity.Product;
 import com.example.product.entity.Stock;
+import com.example.product.repository.ProductRepository;
 import com.example.product.repository.StockRepository;
 import com.example.product.service.contrat.StockServiceContrat;
 import org.springframework.stereotype.Service;
@@ -15,16 +16,20 @@ import java.util.Optional;
 @Service
 public class StockService implements StockServiceContrat {
     StockRepository stockRepository;
-    ProductService productService;
+    ProductRepository productRepository;
 
-
-    public StockService(StockRepository stockRepository, ProductService productService) {
+    public StockService(StockRepository stockRepository, ProductRepository productRepository) {
         this.stockRepository = stockRepository;
-        this.productService = productService;
+        this.productRepository = productRepository;
     }
 
     @Override
     public Stock addStock(Stock stock) {
+        return stockRepository.save(stock);
+    }
+
+    @Override
+    public Stock updateStock(Stock stock){
         return stockRepository.save(stock);
     }
 
@@ -45,13 +50,13 @@ public class StockService implements StockServiceContrat {
 
     @Override
     public void deleteStock(Long id) {
-        List<Product> products = productService.getAllProducts();
+        List<Product> products = productRepository.findAll();
         List<Product> productsOfStock = new ArrayList<>();
         for (Product product : products) {
             System.out.println(product.getId());
             if (Objects.equals(product.getStock().getId(), id)) {
                 product.setStateOfProduct(StockState.DESTROYED);
-                productService.addProduct(product);
+                productRepository.save(product);
                 productsOfStock.add(product);
             }
         }
@@ -60,13 +65,6 @@ public class StockService implements StockServiceContrat {
         stockRepository.save(stock);
     }
 
-    @Override
-    public Integer numberOfProductInStock(Long id) {
-        Stock stock = stockRepository.findById(id).get();
-        List<Product> productList = productService.getAllProducts();
-        productList = productList.stream().filter(product -> Objects.equals(product.getStock().getId(), stock.getId())).toList();
 
-        return productList.size();
-    }
 
 }
