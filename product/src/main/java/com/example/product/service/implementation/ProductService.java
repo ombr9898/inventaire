@@ -35,7 +35,22 @@ public class ProductService implements ProductServiceContrat {
 
         return products;
     }
+    public List<Product> getProductOfLocation(Long id) {
+        List<Stock> stocks = stockService.getStocks();
+        stocks = stocks.stream().filter(stock -> stock.getLocation().getId() == id).toList();
+        List<Product> productList = productService.getAllProducts();
+        List productListByLocation = new ArrayList();
 
+        for (Stock stock : stocks
+        ) {
+            List<Product> product = productList.stream().filter(productLine -> Objects.equals(productLine.getStock().getId(), stock.getId())).toList();
+            for (int i = 0; i < product.size(); i++) {
+                productListByLocation.add(product.get(i));
+            }
+        }
+        return productListByLocation;
+
+    }
     @Override
     public Product updateProduct(Long id, Product product) {
         List<Product> productList = new ArrayList<>();

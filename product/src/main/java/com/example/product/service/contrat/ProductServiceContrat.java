@@ -11,6 +11,8 @@ public interface ProductServiceContrat {
 
     List<Product> getProductOfStock(Stock stock);
 
+    List<Product> getProductOfLocation(Location location);
+
     Product updateProduct(Long id, Product product);
 
     Optional<Product> getProduct(Long id);

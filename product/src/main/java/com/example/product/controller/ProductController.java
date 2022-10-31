@@ -39,6 +39,10 @@ public class ProductController {
     public List<Product> getProductOfStock(@PathVariable("stock") Stock stock) {
         return productService.getProductOfStock(stock);
     }
+    @GetMapping(value = "/productbylocation/{id}}")
+    public List<Product> getProductOfLocation(@PathVariable("id") Long id) {
+        return productService.getProductOfLocation(id);
+    }
 
     @GetMapping(value = "/product/{id}")
     public Optional<Product> getProduct(@PathVariable("id") Long id) {
