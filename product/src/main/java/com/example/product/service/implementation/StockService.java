@@ -15,12 +15,12 @@ import java.util.Optional;
 @Service
 public class StockService implements StockServiceContrat {
     StockRepository stockRepository;
-    ProductRepository productRepository;
+    ProductService productService;
 
 
-    public StockService(StockRepository stockRepository, ProductRepository productRepository) {
+    public StockService(StockRepository stockRepository, ProductService productService) {
         this.stockRepository = stockRepository;
-        this.productRepository = productRepository;
+        this.productService = productService;
     }
 
     @Override
@@ -42,17 +42,14 @@ public class StockService implements StockServiceContrat {
 
     @Override
     public void deleteStock(Long id) {
-        List<Product> products = productRepository.findAll();
+        List<Product> products = productService.getAllProducts();
         List<Product> productsOfStock = new ArrayList<>();
-        for (Product product : products
-        ) {
+        for (Product product : products) {
             System.out.println(product.getId());
             if (product.getStock().getId() == id) {
                 product.setStateOfProduct(StockState.DESTROYED);
-                productRepository.save(product);
+                productService.addProduct(product);
                 productsOfStock.add(product);
-
-
             }
         }
         Stock stock = stockRepository.findById(id).get();
@@ -64,7 +61,7 @@ public class StockService implements StockServiceContrat {
     public Integer numberOfProductInStock(Long id) {
         Stock stock = stockRepository.findById(id).get();
         System.out.println(stock.getId());
-        List<Product> productList = productRepository.findAll();
+        List<Product> productList = productService.getAllProducts();
         productList = productList.stream().filter(product -> product.getStock().getId() == stock.getId()).toList();
         System.out.println(productList);
 

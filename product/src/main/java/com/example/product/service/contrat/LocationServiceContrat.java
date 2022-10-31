@@ -14,5 +14,5 @@ public interface LocationServiceContrat {
     List<Location> getLocation();
     Void deleteLocation(Long id);
 
-    Integer numberOfProductInLocation(Location location);
+    Integer numberOfProductInLocation(Long id);
 }

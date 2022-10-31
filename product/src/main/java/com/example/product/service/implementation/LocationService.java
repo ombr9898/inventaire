@@ -16,13 +16,13 @@ import java.util.Optional;
 @Service
 public class LocationService implements LocationServiceContrat {
     LocationRepository locationRepository;
-    ProductRepository productRepository;
-    StockRepository stockRepository;
+    ProductService productService;
+    StockService stockService;
 
-    public LocationService(LocationRepository locationRepository, ProductRepository productRepository, StockRepository stockRepository) {
+    public LocationService(LocationRepository locationRepository, ProductService productService, StockService stockService) {
         this.locationRepository = locationRepository;
-        this.productRepository = productRepository;
-        this.stockRepository = stockRepository;
+        this.productService = productService;
+        this.stockService = stockService;
     }
 
     @Override
@@ -54,10 +54,10 @@ public class LocationService implements LocationServiceContrat {
     }
 
     @Override
-    public Integer numberOfProductInLocation(Location location) {
-        List <Stock> stocks = stockRepository.findAll();
-        stocks = stocks.stream().filter(stock -> stock.getLocation().getId()== location.getId()).toList();
-        List<Product> productList= productRepository.findAll();
+    public Integer numberOfProductInLocation(Long id) {
+        List <Stock> stocks = stockService.getStocks();
+        stocks = stocks.stream().filter(stock -> stock.getLocation().getId()== id).toList();
+        List<Product> productList= productService.getAllProducts();
         List productListByLocation=new ArrayList();
         
         for (Stock stock : stocks

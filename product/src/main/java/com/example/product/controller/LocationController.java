@@ -37,8 +37,8 @@ public class LocationController {
         LocationService.deleteLocation(id);
         return "Location Deleted";
     }
-    @GetMapping(value = "/location/numofproduct/{location}")
-    public Integer numberOfProductInLocation(@PathVariable("location") Location location) {
-        return LocationService.numberOfProductInLocation(location);
+    @GetMapping(value = "/location/numofproduct/{id}")
+    public Integer numberOfProductInLocation(@PathVariable("id") Long id) {
+        return LocationService.numberOfProductInLocation(id);
     }
 }
